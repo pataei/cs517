@@ -1,0 +1,88 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.2.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 07e4534e59ef68fe1ea65402cb24f6c66d8a0ce0137e9e697b5b8bf7e941df08
+
+name:           cs517prj
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/githubuser/cs517prj#readme>
+homepage:       https://github.com/githubuser/cs517prj#readme
+bug-reports:    https://github.com/githubuser/cs517prj/issues
+author:         Parisa Ataei
+maintainer:     ataeip@oregonstate.edu
+copyright:      2020 Author name here
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/githubuser/cs517prj
+
+library
+  exposed-modules:
+      Algebra
+      Config
+      SAT
+  other-modules:
+      Paths_cs517prj
+  hs-source-dirs:
+      src
+  default-extensions: GeneralizedNewtypeDeriving DeriveDataTypeable StandaloneDeriving FlexibleInstances
+  build-depends:
+      HDBC
+    , base >=4.7 && <5
+    , bytestring
+    , containers >=0.6 && <1
+    , convertible
+    , mtl
+    , sbv
+    , time
+  default-language: Haskell2010
+
+executable cs517prj-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_cs517prj
+  hs-source-dirs:
+      app
+  default-extensions: GeneralizedNewtypeDeriving DeriveDataTypeable StandaloneDeriving FlexibleInstances
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      HDBC
+    , base >=4.7 && <5
+    , bytestring
+    , containers >=0.6 && <1
+    , convertible
+    , cs517prj
+    , mtl
+    , sbv
+    , time
+  default-language: Haskell2010
+
+test-suite cs517prj-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_cs517prj
+  hs-source-dirs:
+      test
+  default-extensions: GeneralizedNewtypeDeriving DeriveDataTypeable StandaloneDeriving FlexibleInstances
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      HDBC
+    , base >=4.7 && <5
+    , bytestring
+    , containers >=0.6 && <1
+    , convertible
+    , cs517prj
+    , mtl
+    , sbv
+    , time
+  default-language: Haskell2010
