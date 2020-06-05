@@ -1,0 +1,20 @@
+\begin{thebibliography}{1}
+
+\bibitem{vldbArXiv}
+Parisa Ataei, Qiaoran Li, Eric Walkingshaw, and Arash Termehchy.
+\newblock Managing variability in relational databases by vdbms, 2019.
+
+\bibitem{HW16fosd}
+Spencer Hubbard and Eric Walkingshaw.
+\newblock {Formula Choice Calculus}.
+\newblock In {\em {Int.\ Work.\ on Feature-Oriented Software Development
+  (FOSD)}}, pages 49--57. ACM, 2016.
+
+\bibitem{minBDD}
+A.~L. {Oliveira}, L.~P. {Carloni}, T.~{Villa}, and A.~L.
+  {Sangiovanni-Vincentelli}.
+\newblock Exact minimization of binary decision diagrams using implicit
+  techniques.
+\newblock {\em IEEE Transactions on Computers}, 47(11):1282--1296, 1998.
+
+\end{thebibliography}

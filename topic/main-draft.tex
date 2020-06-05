@@ -1,0 +1,222 @@
+%\documentclass{article}
+
+\documentclass[sigconf]{acmart}
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{hyperref}
+\usepackage{comment}
+
+\usepackage{graphicx}
+\usepackage{balance}  % for  \balance command ON LAST PAGE  (only there!)
+\usepackage{comment}
+\usepackage{accents}
+\usepackage{lambda,cc}
+\usepackage{mathtools} 
+\usepackage{array,multirow}
+%\usepackage{hhline}
+\usepackage{arydshln}
+%\usepackage{color}
+%\usepackage[usenames, dvipsnames]{xcolor}
+\usepackage{xcolor}
+%\usepackage{colortbl}
+%\usepackage{booktabs}
+\usepackage{mathpartir}
+\usepackage{hyperref}
+\usepackage[normalem]{ulem}
+% commuting diagram packages
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{wrapfig}
+%\usepackage{blindtext}% for example text here only
+\usepackage[inline]{enumitem} %remove enumerate indent
+\usepackage{amssymb}%for arrow labels
+
+\usepackage{listings} % for v-sql example code
+
+\lstset{
+   breaklines=true,                                     % line wrapping on
+   language=SQL,
+%   frame=ltrb,
+   framesep=2pt,
+   basicstyle=\normalsize,
+   keywordstyle=\ttfamily\color{black},
+   identifierstyle=\ttfamily\color{black}\bfseries,
+   commentstyle=\color{Brown},
+   stringstyle=\ttfamily,
+   showstringspaces=ture
+}
+
+% references
+\newcommand{\tabref}[1]{\hyperref[tab:#1]{Table~\ref*{tab:#1}}}
+\newcommand{\figref}[1]{\hyperref[fig:#1]{Figure~\ref*{fig:#1}}}
+\newcommand{\secref}[1]{\hyperref[sec:#1]{Section~\ref*{sec:#1}}}
+\newcommand{\defref}[1]{\hyperref[def:#1]{Definition~\ref*{def:#1}}}
+\newcommand{\appref}[1]{\hyperref[app:#1]{Appendix~\ref*{app:#1}}}
+\newcommand{\chref}[1]{\hyperref[ch:#1]{Chapter~\ref*{ch:#1}}}
+\newcommand{\thmref}[1]{\hyperref[thm:#1]{Theorem~\ref*{thm:#1}}}
+\newcommand{\lemref}[1]{\hyperref[lem:#1]{Lemma~\ref*{lem:#1}}}
+\newcommand{\exref}[1]{\hyperref[ex:#1]{Example~\ref*{eg:#1}}}
+
+%colors
+\definecolor{deepcarminepink}{rgb}{0.94, 0.19, 0.22}%all shared
+\definecolor{mediumelectricblue}{rgb}{0.01, 0.31, 0.59}%middlename
+\definecolor{frenchblue}{rgb}{0.0, 0.45, 0.73}%lastname
+\definecolor{green(munsell)}{rgb}{0.0, 0.66, 0.47}%iceland
+\definecolor{violet(ryb)}{rgb}{0.53, 0.0, 0.69}%us,invest
+\definecolor{navyblue}{rgb}{0.0, 0.0, 0.5}%v-table
+\definecolor{persimmon}{rgb}{0.93, 0.35, 0.0}%iran
+\definecolor{Plum}{rgb}{0.78, 0.08, 0.52}%us,bank
+\definecolor{ruby}{rgb}{0.88, 0.07, 0.37}%us,bank
+
+\definecolor{light-gray}{gray}{0.95}
+\newcommand{\code}[1]{\colorbox{light-gray}{\texttt{#1}}}
+
+\newcommand{\resp}[1]{\ifdefined\color
+                        {\color{blue}[#1]}%
+                      \else
+                        {\emph{[#1]}}%
+                      \fi}
+
+
+%TODO
+\usepackage{lipsum}                     % Dummytext
+\usepackage{xargs}                      % Use more than one optional parameter
+                                        % in a new commands
+\usepackage{etoolbox}
+\usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
+\newcommandx{\eric}[2][1=]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{#2}}
+\newcommandx{\arash}[2][1=]{\todo[linecolor=violet(ryb),backgroundcolor=violet(ryb)!25,bordercolor=violet(ryb),#1]{#2}}
+%\newcommandx{\arashResp}[2][1=]{\todo[linecolor=blue,backgroundcolor=violet(ryb)!25,bordercolor=violet(ryb),#1]{#2}}
+\newcommand{\arashComment}[1]{\TODO {#1}}
+\newcommandx{\responded}[1][1=]{\todo[linecolor=green,backgroundcolor=green!25,bordercolor=green,#1]{responded!}}
+\newcommandx{\think}[2][1=]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,#1]{#2}}
+\newcommandx{\moredet}[2][1=]{\todo[linecolor=green(munsell),backgroundcolor=green(munsell)!25,bordercolor=green(munsell),#1]{#2}}
+\newcommandx{\wrrite}[2][1=]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,#1]{#2}}
+\newcommandx{\rewrite}[2][1=]{\todo[linecolor=frenchblue,backgroundcolor=frenchblue!25,bordercolor=frenchblue,#1]{#2}}
+\newcommandx{\ensure}[2][1=]{\todo[linecolor=ruby,backgroundcolor=ruby!25,bordercolor=ruby,#1]{#2}}
+\newcommandx{\dropit}[2][1=]{\todo[linecolor=persimmon,backgroundcolor=persimmon!25,bordercolor=persimmon,#1]{#2}}
+\newcommandx{\maybeAdd}[2][1=]{\todo[linecolor=navyblue,backgroundcolor=navyblue!25,bordercolor=navyblue,#1]{#2}}
+\newcommandx{\structure}[2][1=]{\todo[linecolor=yellow,backgroundcolor=yellow!25,bordercolor=yellow,#1]{#2}}
+\newcommandx{\dfref}[2][1=]{\todo[linecolor=gray,backgroundcolor=gray!25,bordercolor=gray,#1]{#2}}
+\newcommand{\soc}{\rewrite {stream of consciousness}}
+\newcommand{\badph}{\rewrite {bad pharagraph}}
+\newcommand{\badstory}{\rewrite {bad story}}
+\newcommand{\badsent}{\rewrite {bad sentence}}
+\newcommand{\tbf}{\wrrite {fill later}}
+\newcommand{\point}{\textcolor {green(munsell)}}
+\newcommand{\chck}{\rewrite{read the ref to make sure your understanding is right!}}
+%\newcommandx{\thiswillnotshow}[2][1=]{\todo[disable,#1]{#2}}
+
+\input{names}
+\input{vdbOps}
+
+
+\newcommand*{\natNum}{\ensuremath{\mathbb{N}}}
+\newcommand*{\natStar}{\ensuremath{\mathbb{N}^\ast}}
+
+\newtheorem{theorem}{Theorem}
+
+\title{CS517-Project Proposal}
+\author{Parisa S. Ataei}
+
+\begin{document}
+\maketitle
+
+\begin{comment}
+%Mike's comment:
+Looks solid, and I'm confident that you know what you're doing. However please try to help the reader understand what's going on (I don't understand syntax-driven induction, variational point). Often questions of minimality are in Sigma2 (there exists a smaller program such that for all inputs, the two give the same output). So this problem might be too hard. It depends on the size of the program's domain.
+\end{comment}
+
+First, familiarize yourself with the project guidelines. Then submit a response here with the following information. Please, no more than a few sentences for each question (you will have a chance to write a whole document about this):
+
+\begin{enumerate}
+\item
+What is the NP-hard problem that you will focus on? (input, output, any terminology needed to understand it).
+
+Assume we have the syntax of a query language, given in \figref{v-alg-def}.
+%and the semantics of a language. 
+The problem is: given the program $p$ in this language is there a (smaller) program $p^\prime$ that is semantically equivalent to $p$? 
+\begin{figure}
+
+\begin{syntax}
+
+% feature expressions
+\synDef{\dimMeta}{\ffSet}
+  &\eqq& \multicolumn{2}{l}{%
+         \t \myOR \f \myOR \fName \myOR \neg\fName
+         \myOR \dimMeta\wedge\dimMeta \myOR \dimMeta\vee\dimMeta}
+\\[1.5ex]
+
+% variational conditions
+\synDef{\vCond}{\vCondSet}
+  &\eqq& \multicolumn{2}{l}{%
+         \t \myOR \f \myOR \att\bullet\cte \myOR \att\bullet\att
+         \myOR \neg\vCond \myOR \vCond\vee\vCond} \\
+     &|& \multicolumn{2}{l}{\vCond\wedge\vCond \myOR \chc{\vCond,\vCond}}
+\\[1.5ex]
+
+\synDef{\vAttList}{\vAttSet}
+  &\eqq&  \multicolumn{2}{l}{%
+  \vAtt \myOR \chc{\vAtt,\vAtt} \myOR \vAtt,\vAttList \myOR \chc{\vAtt,\vAtt},\vAttList}
+  \\[1.5ex]
+  
+% variational relational algebra
+\synDef{\vQ}{\qSet}
+  &\eqq& \vRel                 & \textit{Relation reference} \\
+%     &|& \vRen[\vRel]{\vQ}     & \textit{Renaming} \\
+     &|& \vPrj[\vAttList]{\vQ} & \textit{Projection} \\
+     &|& \vSel\vQ              & \textit{Selection} \\
+     &|& \vQ \times \vQ  & \textit{Join} \\
+     &|& \chc{\vQ,\vQ}         & \textit{Choice} \\
+     &|& \empRel               & \textit{Empty relation} \\
+%    &|& \vQ \times \vQ        & \textit{Cartesian Product} \\
+%    &|& \vQ \circ \vQ         & \textit{Set operation} \\
+\end{syntax}
+
+\caption{Syntax of variational relational algebra, where $\bullet$ ranges over
+comparison operators ($<, \leq, =, \neq, >, \geq$), \cte\ over cosntant values,
+\att\ over attribute names, and \vAttList\ over lists of variational attributes.
+The syntactic category \dimMeta\ represents feature expressions, \vCond\
+is variational conditions, and \vQ\ is variational relational algebra terms.}
+\label{fig:v-alg-def}
+\end{figure}
+
+I want to attempt to solve this using the syntax-driven induction of program $p$ and see if a variational point can be omitted without changing the semantics of the program. 
+
+
+\item
+What is the relevance of this problem to an area of CS research? It's quite OK if the relevance is extremely narrow.
+
+Program equivalence is one of the most important problems in formal verification and thus, in CS.
+
+\item 
+Are there any references (academic articles) that you know will be relevant for writing the project writeup?
+
+Yes. I have to look into the research for program equivalence, however, lots of research has been done on variational programming and variational data which I will be using~\cite{EWC13fosd,Walk14onward,MMWWK17vamos,Walk14onward}.
+The provided query language is a simpler version of the language I designed for my ongoing research project~\cite{ATW18poly,ATW17dbpl}.
+
+\item
+What is your rough plan for implementing the software tool? Please briefly discuss input/output formats, choice of programming language, and any relevant libraries that you might use.
+
+I am planning to reduce the AST of a program to a SAT problem s.t. if it is satisfiable then there exists a (smaller) equivalent program. 
+
+The input is a program written in the given language and the output is yes/no. 
+
+I am using Haskell and the SBV library for solving the SAT formula.
+
+\item 
+You may do the project alone or in groups of 2. If you are in a group, what is your plan for collaboration and division of labor?
+
+I will be doing the project on my own.
+
+\end{enumerate}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{bib/eric,bib/martin,bib/vdbms,bib/change,bib/vds,bib/fp,bib/error-reporting,bib/misc,bib/dblp2_short}
+
+
+
+\end{document}

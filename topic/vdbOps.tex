@@ -1,0 +1,187 @@
+\newcommand{\blueit}[1]{\textcolor{blue} {#1}}
+
+\newcommand{\Cat}[1]{\mathit{#1}}
+\newcommand{\myOR}{\hspace{1.5ex}|\hspace{1.5ex}}
+\newcommand{\VVal}[1]{#1'}
+\newcommand{\VVVal}[1]{#1''}
+
+\newcommand{\vlift}[1]{\lceil #1 \rceil_S^{S'}}
+
+
+% defining syntax
+\newcommand{\synDef}[2]{\OB{#1 \in #2 }}
+\newcommand{\eqq}{\OB{\Coloneqq}}
+\renewcommand{\t}{\OB{\prog{true}}}
+\newcommand{\f}{\OB{\prog{false}}}
+
+%constraining function
+\newcommand{\constrain}[2][\vSch]{\OB{\lfloor #2 \rfloor_{#1}}}
+
+% defining semantics
+\newcommand*{\fS}{\OB{\mathbb{E}}}
+\newcommand*{\fSem}[2][\config]{\OB{\fS\sem[#1]{#2}}}
+
+\newcommand*{\elemS}{\OB{\mathbb{X}}}
+\newcommand*{\elemSem}[2][\config]{\OB{\elemS\sem[#1]{#2}}}
+
+\newcommand*{\elemG}{\OB{\mathcal{G}}}
+\newcommand*{\elemGroup}[1][\elem]{\OB{\elemG\left({#1}\right)}}
+
+\newcommand*{\qG}{\OB{\mathcal{Q}}}
+\newcommand*{\qGroup}[1]{\OB{\qG\left({#1}\right)}}
+
+\newcommand*{\cG}{\OB{\mathcal{C}}}
+\newcommand*{\cGroup}[1][\vCond]{\OB{\cG\left({#1}\right)}}
+
+\newcommand*{\aG}{\OB{\mathcal{A}}}
+\newcommand*{\aGroup}[1][\vAttList]{\OB{\aG\left({#1}\right)}}
+
+\newcommand*{\oS}{\OB{\mathbb{O}}}
+\newcommand*{\oSem}[2][\config]{\OB{\oS\sem[#1]{#2}}}
+
+\newcommand*{\olS}{\OB{\mathbb{A}}}
+\newcommand*{\olSem}[2][\config]{\OB{\olS\sem[#1]{#2}}}
+
+\newcommand*{\orS}{\OB{\mathbb{R}}}
+\newcommand*{\orSem}[2][\config]{\OB{\orS\sem[#1]{#2}}}
+
+\newcommand*{\otS}{\OB{\mathbb{T}}}
+\newcommand*{\otSem}[2][\config]{\OB{\otS\sem[#1]{#2}}}
+
+\newcommand*{\ouS}{\OB{\mathbb{U}}}
+\newcommand*{\ouSem}[2][\config]{\OB{\ouS\sem[#1]{#2}}}
+
+\newcommand*{\ovS}{\OB{\mathbb{V}}}
+\newcommand*{\ovSem}[2][\config]{\OB{\ovS\sem[#1]{#2}}}
+
+\newcommand*{\osS}{\OB{\mathbb{S}}}
+\newcommand*{\osSem}[2][\config]{\OB{\osS\sem[#1]{#2}}}
+
+\newcommand*{\odbS}{\OB{\mathbb{I}}}
+\newcommand*{\odbSem}[2][\config]{\OB{\odbS\sem[#1]{#2}}}
+
+%\newcommand*{\eS}{\OB{Q}}
+%\newcommand*{\eSem}[2][\config]{\OB{\eS\sem[#1]{#2}}}
+
+\newcommand*{\ecS}{\OB{\mathbb{C}}}
+\newcommand*{\ecSem}[2][\config]{\OB{\ecS\sem[#1]{#2}}}
+
+\newcommand*{\eeS}{\OB{\mathbb{Q}}}
+\newcommand*{\eeSem}[2][\config]{\OB{\eeS\sem[#1]{#2}}}
+
+%\newcommand*{\tqS}{\OB{T_Q}}
+%\newcommand*{\tqSem}[1]{\OB{\tqS\sem[]{#1}}}
+
+% vset operations
+\newcommand{\pushIn}[1]{\OB{\downarrow\!\!\left(#1\right)}}
+
+% spj operations
+\newcommand{\pPrj}[2][\pAtt]{\OB{\pi_{#1} #2}}
+\newcommand{\pSel}[2][\pCond]{\OB{\sigma_{#1} #2}}
+\newcommand{\setDef}[1]{\OB{\{#1\}}}
+
+% conditions
+\newcommand{\op}[2]{\OB{#1\bullet#2}}
+\newcommand{\annd}[1]{\OB{{#1}_1 \wedge {#1}_2}}
+\newcommand{\orr}[1]{\OB{{#1}_1 \vee {#1}_2}} 
+
+% vspj operations
+\newcommand{\vPrj}[2][\vAttList]{\OB{\pi_{#1} #2}}
+\newcommand{\vSel}[2][\vCond]{\OB{\sigma_{#1} {#2}}}
+\newcommand{\vRen}[2][\nameVar]{\OB{\rho_{#1} #2}}
+\newcommand{\project}[2]{\OB{\pi_{#1} \left({#2}\right)}}
+\newcommand{\projectRel}[2]{\OB{\pi_{#1} {#2}}}
+\newcommand{\select}[2]{\OB{\sigma_{#1} \left({#2}\right)}}
+\newcommand{\selectRel}[2]{\OB{\sigma_{#1} {#2}}}
+\newcommand{\oatt}[2]{\OB{{#1}^{#2}}}
+\newcommand{\join}[3]{\OB{\left({#1}\right) \bowtie_{#3} \left({#2}\right)}}
+\newcommand{\joinRelL}[3]{\OB{{#1} \bowtie_{#3} \left({#2}\right)}}
+\newcommand{\joinRelR}[3]{\OB{\left({#1}\right) \bowtie_{#3} {#2}}}
+\newcommand{\joinRel}[3]{\OB{{#1} \bowtie_{#3} {#2}}}
+\newcommand{\rename}[2]{\OB{\rho_{#1}  \left({#2}\right)}}
+%\newcommand{\choiice}[3]{\OB{\chc [\left({#1}\right)] {\left({#2}\right), \left({#3}\right)}}}
+\newcommand{\choiice}[3]{\OB{\chc [\left({#1}\right)] {{#2}, {#3}}}}
+%\newcommand{\choiceL}[3]{\OB{\chc [\left({#1}\right)] {{#2}, \left({#3}\right)}}}
+%\newcommand{\choiceR}[3]{\OB{\chc [\left({#1}\right)] {\left({#2}\right), {#3}}}}
+%\newcommand{\choiceS}[3]{\OB{\chc [{#1}] {\left({#2}\right), \left({#3}\right)}}}
+\newcommand{\choiceS}[3]{\OB{\chc [{#1}] {{#2}, {#3}}}}
+%\newcommand{\choiceSL}[3]{\OB{\chc [{#1}] {{#2}, \left({#3}\right)}}}
+%\newcommand{\choiceSR}[3]{\OB{\chc [{#1}] {\left({#2}\right), {#3}}}}
+%\newcommand{\chc}[2][\dimMeta]{\OB{#1\chcL#2\chcR}}
+
+
+% query type environment
+%\newcommand{\env}[4][\vctx][\vSch]{\OB{#1,#2 \vdash#3:#4}}
+\makeatletter
+\def\env{
+  \@ifnextchar[
+    {\env@i}
+    {\env@i[\vctx]}
+}
+\def\env@i[#1]{
+  \@ifnextchar[
+    {\env@ii{#1}}
+    {\env@ii{#1}[\vSch]}
+}
+\def\env@ii#1[#2]#3#4{
+{\OB{#1,#2 \vdash#3:#4}}
+}
+\makeatother
+
+\newcommand{\pEnv}[3][\pSch]{\OB{#1 \vdash #2 : #3}}
+\newcommand{\envWithSchema}[2][\OB{\vctx}]{\env[#1]{\vRel}{#2}}
+\newcommand{\envRelInSch}[2][\vSch]{\env[#1]{#2}{\vType}}
+\newcommand{\envOne}[1][\vctx]{\env[#1]{\vQ_1}{\envInContext [\vctx_1] \vType_1}}
+\newcommand{\envTwo}[1][\vctx]{\env[#1]{\vQ_2}{\envInContext [\vctx_2] \vType_2}}
+\newcommand{\envPrime}{\env{\vQ}{\envInContext[\VVal \vctx]{\VVal \vType}}}
+
+% condition type environment
+\newcommand{\envCond}[2][\vctx, \vType]{\OB{#1\vdash #2}}
+\newcommand{\envCondAnnot}[2][\vctx, {\pushIn{\annot [\VVal \vctx] \vType}}]{\OB{#1\vdash #2}}
+
+% type and variation context
+\newcommand{\envL}{\OB{\lfloor}}
+\newcommand{\envR}{\OB{\rfloor}}
+\newcommand{\envInContext}[2][\vctx]{\OB{{#2}^{#1}}}
+\newcommand{\envEval}[2]{#1 \equiv #2}
+\newcommand{\imply}{\OB{\rightarrow}}
+\newcommand{\subsume}[2]{\OB{#1 \prec #2}}
+\newcommand{\subsumeExpl}[2]{\OB{#1 \preccurlyeq #2}} 
+\newcommand{\nsubsume}[2]{\OB{#1 \not \prec #2}}
+
+% object in a variational context
+\newcommand{\relInContext}[2][\vRel]{\OB{#1^{#2}}}
+\newcommand{\attInContext}[2][\vAtt]{\OB{#1^{#2}}}
+\newcommand{\defType}[2][\vType]{\OB{#2: #1}}
+
+
+% satisfiability function
+\newcommand{\sat}[1]{\OB{\mathit{sat}\left(#1\right)}}
+\newcommand{\taut}[1]{\OB{\mathit{taut}\left(#1\right)}}
+
+% dbms
+\renewcommand{\dom}[2][\vdbInst]{\OB{\mathit{dom}_{#1}\left(#2\right)}}
+\newcommand{\type}[1][\pAtt]{\OB{\mathit{type}\left(#1\right)}}
+\newcommand{\attr}[1][\pRel]{\OB{\mathit{attr}\left(#1\right)}}
+\newcommand{\arity}[1][\pRel]{\OB{\mathit{arity}\left(#1\right)}}
+\newcommand{\feat}[2][\vObj]{\OB{\mathit{presCond_{#1}}\left(#2\right)}}
+\newcommand{\obj}[1]{\OB{\mathit{obj}\left(#1\right)}}
+
+%\newcommand{\chc}[2][\dimMeta]{\OB{#1\chcL#2\chcR}}
+%\newcommand{\chcPP}[3][\dimMeta]{\chc[#1]{\prog{#2},\prog{#3}}}
+%\newcommand{\chcPPP}[4][\dimMeta]{\chc[#1]{\prog{#2},\prog{#3},\prog{#4}}}
+
+% special equalities
+\newcommand{\spcEq}[1][0cm]{\OB{\hspace{#1}=}}
+\newcommand{\spcEquiv}[1][0cm]{\OB{\hspace{#1}\equiv}}
+
+
+% operations w.r.t. c
+\newcommand{\equivc}{\OB{\equiv_{\config}}}
+
+
+% enumeration and indexing 
+\newcommand{\vvn}[2]{\OB{{#1_1}^{#2_1}, \ldots, {#1_n}^{#2_n}}}
+
+% formulation in general
+\newcommand{\paran}[1]{\OB{\left(#1\right)}}

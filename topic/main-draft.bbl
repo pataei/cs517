@@ -1,0 +1,104 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{5}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{#1}\fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
+% The following commands are used for tagged output and should be
+% invisible to TeX
+\providecommand\bibfield[2]{#2}
+\providecommand\bibinfo[2]{#2}
+\providecommand\natexlab[1]{#1}
+\providecommand\showeprint[2][]{arXiv:#2}
+
+\bibitem[\protect\citeauthoryear{Ataei, Termehchy, and Walkingshaw}{Ataei
+  et~al\mbox{.}}{2017}]%
+        {ATW17dbpl}
+\bibfield{author}{\bibinfo{person}{Parisa Ataei}, \bibinfo{person}{Arash
+  Termehchy}, {and} \bibinfo{person}{Eric Walkingshaw}.}
+  \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{{Variational Databases}}. In
+  \bibinfo{booktitle}{\emph{{Int.\ Symp.\ on Database Programming Languages
+  (DBPL)}}}. \bibinfo{publisher}{ACM}, \bibinfo{pages}{11:1--11:4}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Ataei, Termehchy, and Walkingshaw}{Ataei
+  et~al\mbox{.}}{2018}]%
+        {ATW18poly}
+\bibfield{author}{\bibinfo{person}{Parisa Ataei}, \bibinfo{person}{Arash
+  Termehchy}, {and} \bibinfo{person}{Eric Walkingshaw}.}
+  \bibinfo{year}{2018}\natexlab{}.
+\newblock \showarticletitle{{Managing Structurally Heterogeneous Databases in
+  Software Product Lines}}. In \bibinfo{booktitle}{\emph{{VLDB Workshop:
+  Polystores and Other Systems for Heterogeneous Data (Poly)}}}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Erwig, Walkingshaw, and Chen}{Erwig
+  et~al\mbox{.}}{2013}]%
+        {EWC13fosd}
+\bibfield{author}{\bibinfo{person}{Martin Erwig}, \bibinfo{person}{Eric
+  Walkingshaw}, {and} \bibinfo{person}{Sheng Chen}.}
+  \bibinfo{year}{2013}\natexlab{}.
+\newblock \showarticletitle{{An Abstract Representation of Variational
+  Graphs}}. In \bibinfo{booktitle}{\emph{{Int.\ Work.\ on Feature-Oriented
+  Software Development (FOSD)}}}. \bibinfo{publisher}{ACM},
+  \bibinfo{pages}{25--32}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Meng, Meinicke, Wong, Walkingshaw, and
+  K\"{a}stner}{Meng et~al\mbox{.}}{2017}]%
+        {MMWWK17vamos}
+\bibfield{author}{\bibinfo{person}{Meng Meng}, \bibinfo{person}{Jens Meinicke},
+  \bibinfo{person}{Chu-Pan Wong}, \bibinfo{person}{Eric Walkingshaw}, {and}
+  \bibinfo{person}{Christian K\"{a}stner}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{{A Choice of Variational Stacks: Exploring
+  Variational Data Structures}}. In \bibinfo{booktitle}{\emph{{Int.\ Work.\ on
+  Variability Modelling of Software-Intensive Systems (VaMoS)}}}.
+  \bibinfo{publisher}{ACM}, \bibinfo{pages}{28--35}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Walkingshaw, K\"{a}stner, Erwig, Apel, and
+  Bodden}{Walkingshaw et~al\mbox{.}}{2014}]%
+        {Walk14onward}
+\bibfield{author}{\bibinfo{person}{Eric Walkingshaw},
+  \bibinfo{person}{Christian K\"{a}stner}, \bibinfo{person}{Martin Erwig},
+  \bibinfo{person}{Sven Apel}, {and} \bibinfo{person}{Eric Bodden}.}
+  \bibinfo{year}{2014}\natexlab{}.
+\newblock \showarticletitle{{Variational Data Structures: Exploring Trade-Offs
+  in Computing with Variability}}. In \bibinfo{booktitle}{\emph{{ACM SIGPLAN
+  Symp.\ on New Ideas in Programming and Reflections on Software (Onward!)}}}.
+  \bibinfo{pages}{213--226}.
+\newblock
+
+
+\end{thebibliography}

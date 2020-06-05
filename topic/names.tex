@@ -1,0 +1,619 @@
+%approaches
+\newcommand{\nbf}{NBF}
+\newcommand{\ubf}{UBF}
+\newcommand{\uav}{UAV}
+
+%encoding of variational schema in the database
+\newcommand{\vdbpc}{\OB{\mathit{vdb\_pcs}\left(\mathit{element\_id}, \mathit{pres\_cond} \right)}}
+\newcommand{\tablespc}{\OB{\mathit{tables\_pc}\left(\mathit{table\_name},\mathit{pres\_cond}\right)}}
+
+
+%shorthands
+\newcommand{\ChcExpTxt}{Choice expression}
+\newcommand{\DimTxt}{Choice dimension}
+\newcommand{\ConfigTxt}{Configuration}
+\newcommand{\vdbTxt}{variational database}
+\newcommand{\VdbTxt}{Variational database}
+\newcommand{\vdbInstTxt}{variational database instance}
+\newcommand{\VdbInstTxt}{Variational database instance}
+\newcommand{\vqTxt}{variational query}
+\newcommand{\VqTxt}{Variational query}
+\newcommand{\vqsTxt}{variational queries}
+\newcommand{\VqsTxt}{Variational queries}
+\newcommand{\vschTxt}{variational schema}
+\newcommand{\VschTxt}{Variational schema}
+\newcommand{\tenvTxt}{type}
+\newcommand{\TenvTxt}{Type}
+\newcommand{\vctxTxt}{variation context}
+\newcommand{\VctxTxt}{Variation context}
+\newcommand{\vRelSchTxt}{variational relation schema}
+\newcommand{\VrelSchTxt}{Variational relation schema}
+\newcommand{\vrelTxt}{variational relation}
+\newcommand{\VrelTxt}{Variational relation}
+\newcommand{\presCondTxt}{presence condition}
+\newcommand{\PresCondTxt}{Presence condition}
+\newcommand{\fexpTxt}{feature expression}
+\newcommand{\FexpTxt}{Feature expression}
+\newcommand{\vCondTxt}{variational condition}
+\newcommand{\VcondTxt}{Variational condition}
+\newcommand{\vAttListTxt}{variational attribute list}
+\newcommand{\VattListTxt}{Variational attribute list}
+\newcommand{\optAttTxt}{optional attribute}
+\newcommand{\OptAttTxt}{Optional attribute}
+\newcommand{\VlistTxt}{Variational list}
+\newcommand{\VsetTxt}{Variational set}
+\newcommand{\AnnotVsetTxt}{Annotated variational set}
+\newcommand{\AnnotVlistTxt}{Annotated variational list}
+\newcommand{\VobjTxt}{Variational object}
+\newcommand{\AttTxt}{Attribute}
+\newcommand{\RelSchTxt}{Relation schema}
+\newcommand{\SchTxt}{Schema}
+\newcommand{\RelTxt}{Relation}
+\newcommand{\DbInstTxt}{Database instance}
+\newcommand{\DbTxt}{Database}
+\newcommand{\CondTxt}{Condition}
+\newcommand{\vrelAlgTxt}{variational relational algebra}
+\newcommand{\VrelAlgTxt}{variational relational algebra}
+\newcommand{\typeSys}{type system}
+\newcommand{\varPres}{variation preserving}
+\newcommand{\VarPres}{Variation preserving}
+\newcommand{\FTxt}{Feature}
+\newcommand{\QTxt}{Query}
+%\newcommand{\VcondTxt}{Variational condition}
+\newcommand{\fctTxt}{true feature set}
+\newcommand{\osemTxt}{selection semantics /selection /semantics /configuration semantics/ configuring}
+
+%needs names
+\newcommand{\nZero}{\textbf{N0}}
+\newcommand{\nOne}{\textbf{N1}}
+\newcommand{\nTwo}{\textbf{N2}}
+\newcommand{\nThree}{\textbf{N3}}
+\newcommand{\basic}{\OB{\mathsf{basic}}}
+\newcommand{\educational}{\OB{\mathsf{educational}}}
+
+%motivating ex names
+\newcommand{\employee}{\OB{\mathit{emp}}}
+\newcommand{\eng}{\OB{\mathit{eng}}}
+\newcommand{\edu}{\OB{\mathit{edu}}}
+\newcommand{\base}{\OB{\mathit{base}}}
+\newcommand{\oncamp}{\OB{\mathit{onCamp}}}
+\newcommand{\online}{\OB{\mathit{onLine}}}
+\newcommand{\tI}{\OB{T_i}}
+\newcommand{\dI}{\OB{D_i}}
+\newcommand{\dOne}{\OB{D_1}}
+\newcommand{\dFive}{\OB{D_5}}
+\newcommand{\sI}{\OB{S_i}}
+\newcommand{\sOne}{\OB{S_1}}
+\newcommand{\sTwo}{\OB{S_2}}
+\newcommand{\sThree}{\OB{S_3}}
+\newcommand{\sFour}{\OB{S_4}}
+\newcommand{\sFive}{\OB{S_5}}
+\newcommand{\sV}{\OB{S_v}}
+\newcommand{\vOne}{\OB{V_1}}
+\newcommand{\vTwo}{\OB{V_2}}
+\newcommand{\vThree}{\OB{V_3}}
+\newcommand{\vFour}{\OB{V_4}}
+\newcommand{\vFive}{\OB{V_5}}
+\newcommand{\tOne}{\OB{T_1}}
+\newcommand{\tTwo}{\OB{T_2}}
+\newcommand{\tThree}{\OB{T_3}}
+\newcommand{\tFour}{\OB{T_4}}
+\newcommand{\tFive}{\OB{T_5}}
+\newcommand{\fOne}{\OB{f_1}}
+\newcommand{\fTwo}{\OB{f_2}}
+\newcommand{\engemp}{\OB{\mathit{engineerpersonnel}}}
+\newcommand{\othemp}{\OB{\mathit{otherpersonnel}}}
+\newcommand{\pers}{\OB{\mathit{personnel}}}
+\newcommand{\empacct}{\OB{\mathit{empacct}}}
+\newcommand{\empno}{\OB{\mathit{empno}}}
+\newcommand{\name}{\OB{\mathit{name}}}
+\newcommand{\hiredate}{\OB{\mathit{hiredate}}}
+\newcommand{\titleatt}{\OB{\mathit{title}}}
+\newcommand{\deptname}{\OB{\mathit{deptname}}}
+\newcommand{\salary}{\OB{\mathit{salary}}}
+\newcommand{\job}{\OB{\mathit{job}}}
+\newcommand{\deptno}{\OB{\mathit{deptno}}}
+\newcommand{\dept}{\OB{\mathit{dept}}}
+\newcommand{\managerno}{\OB{\mathit{managerno}}}
+\newcommand{\empbio}{\OB{\mathit{empbio}}}
+\newcommand{\sex}{\OB{\mathit{sex}}}
+\newcommand{\birthdate}{\OB{\mathit{birthdate}}}
+\newcommand{\fname}{\OB{\mathit{firstname}}}
+\newcommand{\lname}{\OB{\mathit{lastname}}}
+\newcommand{\course}{\OB{\mathit{course}}}
+\newcommand{\ecourse}{\OB{\mathit{ecourse}}}
+\newcommand{\student}{\OB{\mathit{student}}}
+\newcommand{\teacher}{\OB{\mathit{teacher}}}
+\newcommand{\cname}{\OB{\mathit{coursename}}}
+\newcommand{\tno}{\OB{\mathit{teacherno}}}
+\newcommand{\sno}{\OB{\mathit{studentno}}}
+\newcommand{\cno}{\OB{\mathit{courseno}}}
+\newcommand{\class}{\OB{\mathit{class}}}
+\newcommand{\timeatt}{\OB{\mathit{time}}}
+\newcommand{\teach}{\OB{\mathit{teach}}}
+\newcommand{\take}{\OB{\mathit{take}}}
+\newcommand{\grade}{\OB{\mathit{grade}}}
+\newcommand{\isstudent}{\OB{\mathit{std}}}
+\newcommand{\isteacher}{\OB{\mathit{instr}}}
+\newcommand{\studentnum}{\OB{\mathit{stdnum}}}
+\newcommand{\teachernum}{\OB{\mathit{instrnum}}}
+\newcommand{\vI}{\OB{V_i}}
+% separator
+\newcommand{\rSep}{\rn{-}}
+
+\newcommand*{\rE}{\rSep\rn{E}}
+\newcommand*{\rRefl}{\rn{Refl}}
+\newcommand*{\rReflE}{\rRefl\rE}
+
+\newcommand*{\judge}{\rn{Judgement}}
+\newcommand*{\empRelRule}{\rn{EmptyRelation}}
+\newcommand*{\empRelE}{\empRelRule\rE}
+\newcommand*{\relation}{\rn{Relation}}
+\newcommand*{\relationE}{\relation\rE}
+\newcommand*{\choice}{\rn{Choice}}
+\newcommand*{\choiceE}{\choice\rE}
+\newcommand*{\product}{\rn{Product}}
+\newcommand*{\productE}{\product\rE}
+\newcommand*{\setop}{\rn{SetOp}}
+\newcommand*{\setopE}{\setop\rE}
+%\newcommand*{\diff}{\rn{SetDifference}}
+%\newcommand*{\diffE}{\diff\rE}
+\newcommand*{\prj}{\rn{Project}}
+\newcommand*{\prjE}{\prj\rE}
+\newcommand*{\sel}{\rn{Select}}
+\newcommand*{\selE}{\sel\rE}
+%\newcommand*{\rel}{\rn{RelationRef}}
+%\newcommand*{\relE}{\rel\rE}
+
+\newcommand*{\rC}{\rSep\rn{C}}
+\newcommand*{\bool}{\rn{Boolean}}
+\newcommand*{\boolC}{\bool\rC}
+\newcommand*{\nott}{\rn{Neg}}
+\newcommand*{\notC}{\nott\rC}
+\newcommand*{\conj}{\rn{Conjunction}}
+\newcommand*{\conjC}{\conj\rC}
+\newcommand*{\disj}{\rn{Disjunction}}
+\newcommand*{\disjC}{\disj\rC}
+\newcommand*{\attVal}{\rn{AttOptVal}}
+\newcommand*{\attValC}{\attVal\rC}
+\newcommand*{\attAtt}{\rn{AttOptAtt}}
+\newcommand*{\attAttC}{\attAtt\rC}
+\newcommand*{\choiceC}{\choice\rC}
+
+
+%\newcommand*{\rC}{\rSep\rn{C}}
+\newcommand*{\rChoice}{\rn{Choice}\rSep}
+\newcommand*{\rDist}{\rSep\rn{Dist}}
+
+\newcommand*{\rOpDistC}[1]{\rChoice\rn{#1}\rDist\rC}
+\newcommand*{\rSelDistC}{\rOpDistC {Sel}}
+\newcommand*{\rPrjDistC}{\rOpDistC {Prj}}
+\newcommand*{\rProdDistC}{\rOpDistC {Prod}}
+
+\newcommand*{\rOpDist}[1]{\rChoice\rn{#1}\rDist}
+\newcommand*{\rSelDist}{\rOpDist {Sel}}
+\newcommand*{\rPrjDist}{\rOpDist {Prj}}
+\newcommand*{\rProdDist}{\rOpDist {Prod}}
+
+
+%intro spl examples
+%\newcommand*{\ve}{\OB{\mathit{V}}}
+%\newcommand*{\x}{\OB{\mathit{X}}}
+%\newcommand*{\y}{\OB{\mathit{Y}}}
+%\newcommand*{\msg}{\OB{\mathit{message}}}
+%\newcommand*{\sender}{\OB{\mathit{sender}}}
+%\newcommand*{\mdate}{\OB{\mathit{date}}}
+%\newcommand*{\sbj}{\OB{\mathit{subject}}}
+%\newcommand*{\rec}{\OB{\mathit{recepientInfo}}}
+%\newcommand*{\rid}{\OB{\mathit{rid}}}
+%\newcommand*{\rtype}{\OB{\mathit{rtype}}}
+%\newcommand*{\mbody}{\OB{\mathit{body}}}
+%\newcommand*{\encrypt}{\OB{\mathit{encrypt}}}
+%\newcommand*{\decrypt}{\OB{\mathit{decrypt}}}
+%\newcommand*{\encryption}{\OB{\mathit{encryption}}}
+%\newcommand*{\decryption}{\OB{\mathit{decryption}}}
+%\newcommand*{\employee}{\OB{\mathit{employee}}}
+%\newcommand*{\signaturetab}{\OB{\mathit{signature}}}
+%\newcommand*{\verification}{\OB{\mathit{verification}}}
+%\newcommand*{\sign}{\OB{\mathit{sign}}}
+%\newcommand*{\signed}{\OB{\mathit{signed}}}
+%\newcommand*{\signKey}{\OB{\mathit{signKey}}}
+%\newcommand*{\verify}{\OB{\mathit{verify}}}
+%\newcommand*{\isVerified}{\OB{\mathit{isVerified}}}
+%\renewcommand*{\mid}{\OB{\mathit{mid}}} %%FYI: you're defining \mid somewhere else, find where!!!!!!!!!!!!!!
+%\newcommand*{\isEncrypted}{\OB{\mathit{isEncrypted}}}
+%\newcommand*{\encryptionKey}{\OB{\mathit{encryptionKey}}}
+%\newcommand*{\ID}{\OB{\mathit{ID}}}
+%\newcommand{\faN}{\OB{\mathit{fatherName}}}
+%\newcommand{\gender}{\OB{\mathit{gender}}}
+
+
+% enron email system example names
+\newcommand{\enron}{\OB{\mathit{en}}}
+\newcommand{\eid}{\OB{\mathit{eid}}}
+\newcommand{\emailid}{\OB{\mathit{email\_id}}}
+\newcommand{\folder}{\OB{\mathit{folder}}}
+\newcommand{\status}{\OB{\mathit{status}}}
+\newcommand{\verificationkey}{\OB{\mathit{verification\_key}}}
+\newcommand{\publickey}{\OB{\mathit{public\_key}}}
+\newcommand{\midatt}{\OB{\mathit{mid}}}
+\newcommand{\sender}{\OB{\mathit{sender}}}
+\newcommand{\dateatt}{\OB{\mathit{date}}}
+\newcommand{\messageid}{\OB{\mathit{message\_id}}}
+\newcommand{\subject}{\OB{\mathit{subject}}}
+\newcommand{\body}{\OB{\mathit{body}}}
+\newcommand{\issigned}{\OB{\mathit{is\_signed}}}
+\newcommand{\isencrypted}{\OB{\mathit{is\_encrypted}}}
+\newcommand{\isfromremailer}{\OB{\mathit{is\_from\_remaler}}}
+\newcommand{\issystemnotification}{\OB{\mathit{is\_system\_notification}}}
+\newcommand{\isautoresponse}{\OB{\mathit{is\_autoresponse}}}
+\newcommand{\isforwardmsg}{\OB{\mathit{is\_forward\_msg}}}
+\newcommand{\rid}{\OB{\mathit{rid}}}
+\newcommand{\rtype}{\OB{\mathit{rtype}}}
+\newcommand{\rvalue}{\OB{\mathit{rvalue}}}
+\newcommand{\rfid}{\OB{\mathit{rfid}}}
+\newcommand{\reference}{\OB{\mathit{reference}}}
+\newcommand{\forwardaddr}{\OB{\mathit{forwardaddr}}}
+\newcommand{\pseudonym}{\OB{\mathit{pseudonym}}}
+\newcommand{\suffix}{\OB{\mathit{suffix}}}
+\newcommand{\username}{\OB{\mathit{username}}}
+\newcommand{\mailhost}{\OB{\mathit{mailhost}}}
+\newcommand{\nickname}{\OB{\mathit{nickname}}}
+\newcommand{\emailAtt}{\OB{\mathit{email}}}
+\newcommand{\employees}{\OB{\mathit{employeelist}}}
+\newcommand{\messages}{\OB{\mathit{messages}}}
+\newcommand{\recipientinfo}{\OB{\mathit{recipientinfo}}}
+\newcommand{\referenceinfo}{\OB{\mathit{referenceinfo}}}
+\newcommand{\automsg}{\OB{\mathit{auto\_msg}}}
+\newcommand{\forwardmsg}{\OB{\mathit{forward\_msg}}}
+\newcommand{\remailmsg}{\OB{\mathit{remail\_msg}}}
+\newcommand{\filtermsg}{\OB{\mathit{filter\_msg}}}
+\newcommand{\alias}{\OB{\mathit{alias}}}
+\newcommand{\id}{\OB{\mathit{id}}}
+\newcommand{\scores}{\OB{\mathit{SATscores}}}
+%\newcommand{\midatt}{\OB{\mathit{mid}}}
+\newcommand{\midCond}{\OB{\midatt = \xvalue}}
+\newcommand{\header}{\OB{\mathit{header}}}
+\newcommand{\headerAtts}{\OB{\mathit{header\_attributes}}}
+\newcommand{\verifiedAt}{\OB{\mathit{verified\_at}}}
+\newcommand{\signedBy}{\OB{\mathit{signed\_by}}}
+\newcommand{\recievedBy}{\OB{\mathit{recieved\_by}}}
+\newcommand{\verStat}{\OB{\mathit{verification\_status}}}
+\newcommand{\shouldFilter}{\OB{\mathit{should\_filter}}}
+
+\newcommand{\addressbook}{\OB{\mathit{addressbook}}}
+\newcommand{\signature}{\OB{\mathit{signature}}}
+\newcommand{\encryption}{\OB{\mathit{encryption}}}
+\newcommand{\autoresponder}{\OB{\mathit{autoresponder}}}
+\newcommand{\forwardmessages}{\OB{\mathit{forwardmessages}}}
+\newcommand{\remailmessage}{\OB{\mathit{remailmessage}}}
+\newcommand{\filtermessages}{\OB{\mathit{filtermessages}}}
+\newcommand{\basicq}{\OB{\mathit{basic}}}
+%\newcommand{\mailhost}{\OB{\mathit{mailhost}}}
+
+%query names
+\newcommand{\xvalue}{\OB{\mathit{X}}}
+\newcommand{\temp}{\OB{\mathit{temp}}}
+\newcommand{\tempOne}{\OB{\mathit{temp1}}}
+\newcommand{\tempTwo}{\OB{\mathit{temp2}}}
+\newcommand{\eq}{\OB{\mathit{empQ}}}
+\newcommand{\nfq}{\OB{\mathit{Q}}}
+\newcommand{\ntemp}{\OB{\mathit{temp_\mathit{enron}}}}
+\newcommand{\deptOne}{\OB{\mathit{``d001"}}}
+\newcommand{\mrtable}{\OB{\mathit{mes\_rec}}}
+\newcommand{\mretable}{\OB{\mathit{mes\_rec\_emp}}}
+
+% some specific queries
+\newcommand{\Qbasic}{\OB{\nfq_\basicq}}
+\newcommand{\Qfilter}{\OB{\nfq_\mathit{filter}}}
+\newcommand{\Qforward}{\OB{\nfq_\mathit{forward}}}
+\newcommand{\Qencrypt}{\OB{\nfq_\mathit{encrypt}}}
+\newcommand{\Qsig}{\OB{\nfq_\mathit{sig}}}
+\newcommand{\Qbf}{\OB{\nfq_\mathit{bf}}}
+\newcommand{\Qsf}{\OB{\nfq_\mathit{sf}}}
+\newcommand{\Qef}{\OB{\nfq_\mathit{ef}}}
+
+\newcommand{\addressbooku}{{ADDRESSBOOK}}
+\newcommand{\signatureu}{SIGNATURE}
+\newcommand{\encryptionu}{ENCRYPTION}
+\newcommand{\autoresponderu}{AUTORESPONDER}
+\newcommand{\forwardmsgu}{FORWARDMESSAGES}
+\newcommand{\remailmsgu}{REMAILMESSAGE}
+\newcommand{\filtermsgu}{FILTERMESSAGES}
+\newcommand{\mailhostu}{MAILHOST}
+
+\newcommand{\addressbookl}{{ADDRESSBOOK}}
+\newcommand{\signaturel}{SIGNATURE}
+\newcommand{\encryptionl}{ENCRYPTION}
+\newcommand{\autoresponderl}{AUTORESPONDER}
+\newcommand{\forwardmsgl}{FORWARDMESSAGES}
+\newcommand{\remailmsgl}{REMAILMESSAGES}
+\newcommand{\filtermsgl}{FILTERMESSAGES}
+\newcommand{\mailhostl}{MAILHOST}
+
+\newcommand{\faddressbook}{\textcolor{blue} {\OB{\mathit{addressbook}}}}
+\newcommand{\fsignature}{\textcolor{blue} {\OB{\mathit{signature}}}}
+\newcommand{\fencryption}{\textcolor{blue} {\OB{\mathit{encryption}}}}
+\newcommand{\fautoresponder}{\textcolor{blue} {\OB{\mathit{autoresponder}}}}
+\newcommand{\fforwardmsg}{\textcolor{blue} {\OB{\mathit{forwardmessages}}}}
+\newcommand{\fremailmsg}{\textcolor{blue} {\OB{\mathit{remailmessage}}}}
+\newcommand{\ffiltermsg}{\textcolor{blue} {\OB{\mathit{filtermessages}}}}
+\newcommand{\fmailhost}{\textcolor{blue} {\OB{\mathit{mailhost}}}}
+
+\newcommand{\addressbookf}{\OB{\mathit{addressbook}}}
+\newcommand{\signaturef}{\OB{\mathit{signature}}}
+\newcommand{\encryptionf}{\OB{\mathit{encryption}}}
+\newcommand{\autoresponderf}{\OB{\mathit{autoresponder}}}
+\newcommand{\forwardmsgf}{\OB{\mathit{forwardmessages}}}
+\newcommand{\remailmsgf}{\OB{\mathit{remailmessage}}}
+\newcommand{\filtermsgf}{\OB{\mathit{filtermessages}}}
+\newcommand{\mailhostf}{\OB{\mathit{mailhost}}}
+
+\newcommand{\vemployees}{\OB{\mathit{v\_employeelist}}}
+\newcommand{\vmessages}{\OB{\mathit{v\_messages}}}
+\newcommand{\vrecipientinfo}{\OB{\mathit{v\_recipientinfo}}}
+\newcommand{\vreferenceinfo}{\OB{\mathit{v\_referenceinfo}}}
+\newcommand{\vautomsg}{\OB{\mathit{v\_auto\_msg}}}
+\newcommand{\vforwardmsg}{\OB{\mathit{v\_forward\_msg}}}
+\newcommand{\vremailmsg}{\OB{\mathit{v\_remail\_msg}}}
+\newcommand{\vfiltermsg}{\OB{\mathit{v\_filtermsg}}}
+\newcommand{\vmailhost}{\OB{\mathit{v\_mailhost}}}
+\newcommand{\valias}{\OB{\mathit{v\_alias}}}
+\newcommand{\midvalue}{\OB{\mathit{X}}}
+
+% table values
+\newcommand{\tru}{\OB{\mathit{true}}}
+\newcommand{\fls}{\OB{\mathit{false}}}
+\newcommand{\NULL}{\OB{\text{NULL}}}
+
+%features
+\newcommand*{\fName}{\OB{f}}
+\newcommand*{\fSet}{\OB{\mathbf{F}}}
+\renewcommand*{\dimMeta}{\OB{e}}
+\newcommand*{\fModel}{\OB{m}}
+\newcommand*{\ffSet}{\OB{\mathbf{E}}}
+\newcommand*{\bTag}{\OB{b}}
+\newcommand*{\bSet}{\mathbf{B}}
+\newcommand*{\config}{\OB{c}}
+\newcommand*{\confSet}{\OB{\mathbf{C}}}
+\newcommand*{\fct}[1][\config]{\OB{\dimMeta_{#1}^t}}
+\newcommand*{\vctx}{\OB{\dimMeta}}
+
+% example feature, feature category and relation names
+%\newcommand*{\France}{\OB{\mathit{France}}}
+%\newcommand*{\Iceland}{\OB{\mathit{Iceland}}}
+%\newcommand*{\US}{\OB{\mathit{US}}}
+%\newcommand*{\Iran}{\OB{\mathit{Iran}}}
+%\newcommand*{\countryF}{\OB{\mathit{country}}}
+%
+%\newcommand*{\fType}{\OB{\mathit{type}}}
+%\newcommand*{\bank}{\OB{\mathit{bank}}}
+%\newcommand*{\stock}{\OB{\mathit{stock}}}
+%\newcommand*{\invest}{\OB{\mathit{invest}}}
+%
+%\newcommand*{\deposit}{\OB{\mathit{deposit}}}
+%\newcommand*{\account}{\OB{\mathit{account}}}
+%\newcommand*{\amount}{\OB{\mathit{amount}}}
+%\newcommand*{\depositor}{\OB{\mathit{depositor}}}
+%
+%\newcommand*{\member}{\OB{\mathit{member}}}
+%\newcommand*{\id}{\OB{\mathit{ID}}}
+%\newcommand*{\fN}{\OB{\mathit{firstName}}}
+%\newcommand*{\mN}{\OB{\mathit{middleName}}}
+%\newcommand*{\lN}{\OB{\mathit{lastName}}}
+
+%spj objects
+\newcommand*{\pDB}{\OB{\underline{\db}}}
+\newcommand*{\pQ}{\OB{\underline{\q}}}
+\newcommand*{\pQSet}{\OB{\underline{\qSet}}}
+\newcommand*{\pAtt}{\OB{\underline{\att}}}
+\newcommand*{\pAttList}{\OB{\underline{\attList}}}
+\newcommand*{\pRel}{\OB{\underline{\rel}}}
+\newcommand*{\pRelSch}{\OB{\underline{\relSch}}}
+\newcommand*{\pRelCont}{\OB{\underline{\relCont}}}
+\newcommand*{\pRelContSet}{\OB{\underline{\relContSet}}}
+\newcommand*{\pSch}{\OB{\underline{\sch}}}
+\newcommand*{\pInst}{\OB{\underline{\dbInst}}}
+\newcommand*{\pInstSet}{\OB{\underline{\dbInstSet}}}
+\newcommand*{\pAttSet}{\OB{\underline{\attSet}}}
+\newcommand*{\pRelSet}{\OB{\underline{\relSet}}}
+\newcommand*{\pRelSchSet}{\OB{\underline{\relSchSet}}}
+\newcommand*{\pSchSet}{\OB{\underline{\schSet}}}
+\newcommand*{\pAttOpCte}{\OB{\op \pAtt \cte}}
+\newcommand*{\pAttOpAtt}{\OB{\op {\pAtt_1}  {\pAtt_2}}}
+\newcommand*{\pElem}{\OB{\underline \elem}}
+\newcommand*{\pTuple}{\OB{\underline \tuple}}
+\newcommand*{\pTab}{\OB{\underline \tab}}
+
+
+%sql objects
+\newcommand*{\sqlQ}{\OB{\underline{sql}}}
+
+%symbols
+\newcommand*{\db}{\OB{D}}
+\newcommand*{\q}{\OB{q}}
+\newcommand*{\att}{\OB{a}}
+\newcommand*{\rel}{\OB{r}}
+\newcommand*{\tab}{\OB{t}}
+\newcommand*{\relSch}{\OB{s}}
+\newcommand*{\relCont}{\OB{U}}
+\newcommand*{\attList}{\OB{A}}
+\newcommand*{\sch}{\OB{S}}
+\newcommand*{\dbInst}{\OB{\mathcal{I}}}
+\newcommand*{\tuple}{\OB{u}}
+\newcommand*{\vTuple}{\tuple}
+\newcommand*{\annot}[2][\dimMeta]{\OB{{#2}^{#1}}}
+\newcommand*{\elem}{\OB{x}}
+\newcommand*{\elemSet}{\OB{X}}
+\newcommand*{\cond}{\OB{\theta}}
+\newcommand*{\pset}{\OB{\underline {X}}}
+
+
+
+%set symbols
+\newcommand*{\qSet}{\OB{\mathbf{Q}}}
+\newcommand*{\dbInstSet}{\OB{\mathbf{I}}}
+\newcommand*{\attSet}{\OB{\mathbf{A}}}
+\newcommand*{\tabSet}{\OB{\mathbf{T}}}
+\newcommand*{\schSet}{\OB{\mathbf{\mathcal{S}}}}
+\newcommand*{\relSchSet}{\OB{\mathbf{S}}}
+\newcommand*{\relContSet}{\OB{\mathbf{R}}}
+\newcommand*{\condSet}{\OB{\mathbf{\Theta}}}
+
+
+% vspj objects
+\newcommand*{\vDB}{\db}
+\newcommand*{\vSchDef}{\OB{\setDef {{\vRelSch_1 , \ldots, \vRelSch_n}}^\fModel}}
+%{\{\widetilde{s}_{R_1}^{F_1}, \ldots, \widetilde{s}_{R_n}^{F_n}\}^\dimMeta}}
+\newcommand*{\vdbInst}{\OB{\dbInst}}
+\newcommand*{\vdbInstSet}{\OB{\dbInstSet}}
+\newcommand*{\vObj}{\OB{o}}
+\newcommand*{\vObjSet}{\OB{\mathbf{O}}}
+\newcommand*{\vQ}{\OB{\q}}
+%\newcommand*{\vRelSch}[1][\pRel]{\OB{{\VVList{s}}_{#1}}}
+\newcommand*{\vRelSch}{\OB{\relSch}}
+\newcommand*{\vRelCont}{\OB{\relCont}}
+\newcommand*{\vSch}{\OB{\sch}}
+%\newcommand*{\vSch}{\OB{\VVSet {\mathcal{S}}}}
+\newcommand*{\vset}{\OB{X}}
+\newcommand*{\vTab}{\tab}
+\newcommand*{\vRel}{\rel}
+\newcommand*{\vAtt}{\att}
+\newcommand*{\nameVar}{\OB{n}}
+
+%\makeatletter
+%\def\vRel{%
+%   \@ifnextchar[%
+%     {\vRel@i}
+%     {\vRel@i[\dimMeta]}%
+%}
+%\def\vRel@i[#1]{%
+%   \@ifnextchar[%
+%     {\vRel@ii{#1}}
+%     {\vRel@ii{#1}[\pRel]}%
+%}
+%\def\vRel@ii#1[#2]{%
+%\OB{{#2}^{#1}}
+%}
+%\makeatother
+
+\newcommand*{\relNum}{\OB{n}}
+
+\makeatletter
+\def\vRelConfed{%
+   \@ifnextchar[%
+     {\vRelConfed@i}
+     {\vRelConfed@i[\config]}%
+}
+\def\vRelConfed@i[#1]{%
+   \@ifnextchar[%
+     {\vRelConfed@ii{#1}}
+     {\vRelConfed@ii{#1}[\pRel]}%
+}
+\def\vRelConfed@ii#1[#2]{%
+\OB{{#2}^{#1}}
+}
+\makeatother
+
+\makeatletter
+\def\optAtt{%
+   \@ifnextchar[%
+     {\optAtt@i}
+     {\optAtt@i[\dimMeta]}%
+}
+\def\optAtt@i[#1]{%
+   \@ifnextchar[%
+     {\optAtt@ii{#1}}
+     {\optAtt@ii{#1}[\vAtt]}%
+}
+\def\optAtt@ii#1[#2]{%
+%\OB{{\widetilde{#2}}^{#1}}
+\OB{\annot[#1]{#2}}
+}
+\makeatother
+
+%\newcommand*{\vAttt}[2]
+%\newcommand*{\attPres}{\OB{F}}
+\newcommand*{\vAttList}{\OB{\attList}}
+%\widetilde{l}}}
+%\newcommand*{\vRelDef}{\OB{\left[\pRel^{\dimMeta}:\vAttList\right]}}
+
+\makeatletter
+\def\vRelDef{
+   \@ifnextchar[
+      {\vRelDef@i}
+      {\vRelDef@i[\vRel]}
+}
+\def\vRelDef@i[#1]{
+   \@ifnextchar[
+      {\vRelDef@ii{#1}}
+      {\vRelDef@ii{#1}[\dimMeta]}
+}
+\def\vRelDef@ii#1[#2]{
+   \@ifnextchar[
+      {\vRelDef@iii{#1}{#2}}
+      {\vRelDef@iii{#1}{#2}[\vAttList]}
+}
+\def\vRelDef@iii#1#2[#3]{
+\OB{{#1}\left({#3}\right)^{#2}}
+}
+
+\newcommand*{\vRelDefNum}[1]{\OB{\vRelDef [\vRel_{#1}] [\dimMeta_{#1}] [\vAttList_{#1}] }}
+\newcommand*{\vRelDefNumF}[2]{\OB{\vRelDef [\vRel_{#1}][\vAttList_{#1}][\dimMeta \wedge \dimMeta_{#1}]}}
+
+%\newcommand*{\vRelDef}{\OB{\left[\pRel^{\dimMeta}:\vAttList\right]}}
+\newcommand*{\vRelConf}[1][\vRel]{\OB{{#1}^\config}}
+\newcommand*{\vAttSet}{\OB{\attSet}}
+\newcommand*{\vTabSet}{\OB{\tabSet}}
+\newcommand*{\vRelSchSet}{\OB{\relSchSet}}
+\newcommand*{\vRelContSet}{\OB{\relContSet}}
+\newcommand*{\vSchSet}{\OB{\schSet}}
+\newcommand*{\vInstSet}{\OB{\dbInstSet}}
+\newcommand*{\empSet}{\OB{\varnothing}}
+\newcommand*{\emp}{\OB{\varepsilon}}
+\newcommand*{\empAtt}{\OB{\varepsilon}}
+\newcommand*{\empRel}{\OB{\varepsilon}}
+\newcommand*{\vAttOpCte}{\OB{\op \pAtt \cte}}
+\newcommand*{\vAttOpAtt}{\OB{\op {\pAtt_1} {\pAtt_2}}}
+\renewcommand*{\tag}[2]{\OB{{#1}^{#2}}}
+\newcommand*{\pc}{\OB{pc}}
+\newcommand*{\getPC}[1]{\OB{pc\left(#1\right)}}
+\newcommand*{\getRel}[1]{\OB{rel\left(#1\right)}}
+\newcommand*{\getAtt}[1]{\OB{att\left(#1\right)}}
+
+%conditions
+\newcommand*{\pCond}{\OB{\underline{\cond}}}
+\newcommand*{\cte}{\OB{k}}
+\newcommand*{\pCondSet}{\OB{\underline{\condSet}}}
+
+% variational conditions
+\newcommand*{\vCond}{\OB{\cond}}
+\newcommand*{\vCondSet}{\OB{\condSet}}
+
+% vspj typing
+\newcommand*{\vType}{\OB{\vAttList}}
+%\newcommand*{\vContext}{\OB{\vctx}} % --> remove ti
+
+% trans part(Qiaoran)
+%\newcommand*{\vSql}{\OB{vq}}
+%\newcommand*{\vSqlSet}{\OB{\mathbf{VQ}}}
+%\newcommand*{\vRelList}{\OB{rl}}
+%\newcommand*{\vRelListSet}{\OB{\mathbf{VrSet}}}
+%\newcommand*{\oAttList}{\OB{al}}
+%\newcommand*{\oAttListSet}{\OB{\mathbf{Val}}}
+%\newcommand*{\vSqlselect}{\textbf{Select} (\vAttList, \vRelList, \vCond)}
+
+% Qiaoran add for translation part
+% \newcommand*{\tqS}{\OB{T_Q}}
+%\newcommand*{\tqTrans}[1]{\OB{\tqS({#1})}}
+%\newcommand*{\trS}{\OB{T_R}}
+%\newcommand*{\trTrans}[1]{\OB{\trS({#1})}}
+
+%variational list and set
+\newcommand*{\listl}{\OB{l}}
+\newcommand*{\sets}{\OB{s}}
+\newcommand{\VSet}[1]{\smash{\accentset{\rightarrow}{#1}}}
+\newcommand{\VVSet}[1]{\smash{\accentset{\hookrightarrow}{#1}}}
+\newcommand{\VList}[1]{\smash{\accentset{\rightarrowtriangle}{#1}}}
+\newcommand{\VVList}[1]{\smash{\accentset{\lhook\joinrel\rightarrowtriangle}{#1}}}
+\newcommand{\VMap}[1]{\smash{\accentset{\mapsto}{#1}}}

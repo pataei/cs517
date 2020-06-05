@@ -1,0 +1,421 @@
+% --------------------------------------------------------------
+% This is all preamble stuff that you don't have to worry about.
+% Head down to where it says "Start here"
+% --------------------------------------------------------------
+ 
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{hyperref}
+\usepackage{comment}
+
+\usepackage{graphicx}
+\usepackage{balance}  % for  \balance command ON LAST PAGE  (only there!)
+\usepackage{comment}
+\usepackage{accents}
+\usepackage{lambda,cc}
+\usepackage{mathtools} 
+\usepackage{array,multirow}
+%\usepackage{hhline}
+\usepackage{arydshln}
+%\usepackage{color}
+%\usepackage[usenames, dvipsnames]{xcolor}
+\usepackage{xcolor}
+%\usepackage{colortbl}
+%\usepackage{booktabs}
+\usepackage{mathpartir}
+\usepackage{hyperref}
+\usepackage[normalem]{ulem}
+% commuting diagram packages
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{wrapfig}
+%\usepackage{blindtext}% for example text here only
+\usepackage[inline]{enumitem} %remove enumerate indent
+\usepackage{amssymb}%for arrow labels
+
+\usepackage{listings} % for v-sql example code
+
+\lstset{
+   breaklines=true,                                     % line wrapping on
+   language=SQL,
+%   frame=ltrb,
+   framesep=2pt,
+   basicstyle=\normalsize,
+   keywordstyle=\ttfamily\color{black},
+   identifierstyle=\ttfamily\color{black}\bfseries,
+   commentstyle=\color{Brown},
+   stringstyle=\ttfamily,
+   showstringspaces=ture
+}
+
+% references
+\newcommand{\tabref}[1]{\hyperref[tab:#1]{Table~\ref*{tab:#1}}}
+\newcommand{\figref}[1]{\hyperref[fig:#1]{Figure~\ref*{fig:#1}}}
+\newcommand{\secref}[1]{\hyperref[sec:#1]{Section~\ref*{sec:#1}}}
+\newcommand{\defref}[1]{\hyperref[def:#1]{Definition~\ref*{def:#1}}}
+\newcommand{\appref}[1]{\hyperref[app:#1]{Appendix~\ref*{app:#1}}}
+\newcommand{\chref}[1]{\hyperref[ch:#1]{Chapter~\ref*{ch:#1}}}
+\newcommand{\thmref}[1]{\hyperref[thm:#1]{Theorem~\ref*{thm:#1}}}
+\newcommand{\lemref}[1]{\hyperref[lem:#1]{Lemma~\ref*{lem:#1}}}
+\newcommand{\exref}[1]{\hyperref[ex:#1]{Example~\ref*{eg:#1}}}
+
+%colors
+\definecolor{deepcarminepink}{rgb}{0.94, 0.19, 0.22}%all shared
+\definecolor{mediumelectricblue}{rgb}{0.01, 0.31, 0.59}%middlename
+\definecolor{frenchblue}{rgb}{0.0, 0.45, 0.73}%lastname
+\definecolor{green(munsell)}{rgb}{0.0, 0.66, 0.47}%iceland
+\definecolor{violet(ryb)}{rgb}{0.53, 0.0, 0.69}%us,invest
+\definecolor{navyblue}{rgb}{0.0, 0.0, 0.5}%v-table
+\definecolor{persimmon}{rgb}{0.93, 0.35, 0.0}%iran
+\definecolor{Plum}{rgb}{0.78, 0.08, 0.52}%us,bank
+\definecolor{ruby}{rgb}{0.88, 0.07, 0.37}%us,bank
+
+\definecolor{light-gray}{gray}{0.95}
+\newcommand{\code}[1]{\colorbox{light-gray}{\texttt{#1}}}
+
+\newcommand{\resp}[1]{\ifdefined\color
+                        {\color{blue}[#1]}%
+                      \else
+                        {\emph{[#1]}}%
+                      \fi}
+
+
+%TODO
+\usepackage{lipsum}                     % Dummytext
+\usepackage{xargs}                      % Use more than one optional parameter
+                                        % in a new commands
+\usepackage{etoolbox}
+\usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
+\newcommandx{\eric}[2][1=]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{#2}}
+\newcommandx{\arash}[2][1=]{\todo[linecolor=violet(ryb),backgroundcolor=violet(ryb)!25,bordercolor=violet(ryb),#1]{#2}}
+%\newcommandx{\arashResp}[2][1=]{\todo[linecolor=blue,backgroundcolor=violet(ryb)!25,bordercolor=violet(ryb),#1]{#2}}
+\newcommand{\arashComment}[1]{\TODO {#1}}
+\newcommandx{\responded}[1][1=]{\todo[linecolor=green,backgroundcolor=green!25,bordercolor=green,#1]{responded!}}
+\newcommandx{\think}[2][1=]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,#1]{#2}}
+\newcommandx{\moredet}[2][1=]{\todo[linecolor=green(munsell),backgroundcolor=green(munsell)!25,bordercolor=green(munsell),#1]{#2}}
+\newcommandx{\wrrite}[2][1=]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,#1]{#2}}
+\newcommandx{\rewrite}[2][1=]{\todo[linecolor=frenchblue,backgroundcolor=frenchblue!25,bordercolor=frenchblue,#1]{#2}}
+\newcommandx{\ensure}[2][1=]{\todo[linecolor=ruby,backgroundcolor=ruby!25,bordercolor=ruby,#1]{#2}}
+\newcommandx{\dropit}[2][1=]{\todo[linecolor=persimmon,backgroundcolor=persimmon!25,bordercolor=persimmon,#1]{#2}}
+\newcommandx{\maybeAdd}[2][1=]{\todo[linecolor=navyblue,backgroundcolor=navyblue!25,bordercolor=navyblue,#1]{#2}}
+\newcommandx{\structure}[2][1=]{\todo[linecolor=yellow,backgroundcolor=yellow!25,bordercolor=yellow,#1]{#2}}
+\newcommandx{\dfref}[2][1=]{\todo[linecolor=gray,backgroundcolor=gray!25,bordercolor=gray,#1]{#2}}
+\newcommand{\soc}{\rewrite {stream of consciousness}}
+\newcommand{\badph}{\rewrite {bad pharagraph}}
+\newcommand{\badstory}{\rewrite {bad story}}
+\newcommand{\badsent}{\rewrite {bad sentence}}
+\newcommand{\tbf}{\wrrite {fill later}}
+\newcommand{\point}{\textcolor {green(munsell)}}
+\newcommand{\chck}{\rewrite{read the ref to make sure your understanding is right!}}
+%\newcommandx{\thiswillnotshow}[2][1=]{\todo[disable,#1]{#2}}
+
+\input{names}
+\input{vdbOps}
+
+
+\newcommand*{\natNum}{\ensuremath{\mathbb{N}}}
+\newcommand*{\natStar}{\ensuremath{\mathbb{N}^\ast}}
+
+
+\begin{document}
+ 
+\title{CS 517 Project}
+%\date{}
+\maketitle
+\centerline{\author{Parisa S. Ataei}}
+
+\section{Introduction}
+\label{sec:intro}
+
+Program equivalence is generally an undecidable problem, however,
+arguably, it is easier to solve compared to program correctness although
+the two have lots of similarities that one can exploit to solve one using
+the other. While for program correctness one needs to explicitly define
+the formal semantics of a language, equivalency rules can be defined
+for a language to search the space for a given program to find its 
+equivalence programs. However, for such an expensive search to be conclusive,
+the set of reduction rules must be terminating and confluent.
+
+I designed the \emph{Variational Relational Algebra (VRA)} for my research
+which combines Formula Choice Calculus~\cite{HW16fosd} and relational algebra.
+In this project, I reduce a program written in VRA to a propositional formula
+and run a SAT solver on it to see if there exists an equivalence program 
+w.r.t. the variational point. The simplified syntax of VRA is given in \secref{bg}, 
+the problem formalization is given  in \secref{def}, and the reduction of
+program equivalence to a propositional formula is provided in \secref{reduce}.
+Finally, \secref{impl} elaborates on the implementation and \secref{disc}
+discusses the assumptions made to allow a reasonable reduction of AST to
+SAT formulas and how different features to the language break the reduction.
+Additionally, I discuss why I only consider the structural equivalence of programs
+w.r.t. the variational point instead of a more general equivalency.
+
+
+\section{Background}
+\label{sec:bg}
+
+\figref{vra} defines the syntax of the simplified VRA used in this project.
+Feature expressions are propositional formulas of the set of features defined
+for a database. Assume we have a database with features $\fName_1$ and 
+$\fName_2$ and two tables $\vRel_1 (\att_1, \att_2)$ and $\vRel (\att_1, \att_3)$. 
+For simplicity, I assume the database in use is a traditional database and not 
+a variational database. 
+$\vRel_1$ refers to the relation $\vRel_1$ in the database and returns the table
+as stored in the database. 
+Projection $\vPrj \vQ$ projects a set of attributes $\vAttList$ from the subquery $\vQ$.
+For example, the query $\vPrj [\att_1] \vRel_1$ projects the attribute $\att_1$ from the 
+relation $\vRel_1$ stored in the database. As an example of variational query 
+$\vQ_1 = \pi_{ \chc [\fName_1] {\att_1, \att_2}} \vRel_1$ projects the attribute $\att_1$ when
+$\fName_1$ evaluates to \t\ and attribute $\att_2$ otherwise. Selection 
+filters tuples returned from a subquery based on a condition where the condition can
+also be variational. Cross product just provides the cross product of the 
+two given tables. A choice of queries allows one to write queries variationally on
+the top level. For example, one can write $\vQ_1$ as 
+$\chc [\fName_1] {\vPrj [\att_1] \vRel_1, \vPrj [\att_2] \vRel_1}$. Note that a 
+choice cannot necessarily be pushed in or out. For example, the query
+$\chc [\fName_1] {\vRel_1, \vRel_2}$ cannot be simplified.
+Finally, the empty relation $\empRel$ is introduced as a convenient for 
+users to indicate that an alternative of a choice does not do anything while
+the other alternative is only valid under the condition provided by the 
+dimension of the choice (in the choice $\chc {\vQ_1, \vQ_2}$ the feature expression
+\dimMeta\ is called the dimension of the choice).
+Throughout this report a \emph{variational point} refers to where a choice
+has been used in query, this could be at the query level, the attribute
+level, or the condition level.
+
+
+\begin{figure}[hbt!]
+\begin{syntax}
+\small
+% feature expressions
+\synDef{\dimMeta}{\ffSet}
+  &\eqq& \multicolumn{2}{l}{%
+         \t \myOR \f \myOR \fName \myOR \neg\fName
+         \myOR \dimMeta\wedge\dimMeta \myOR \dimMeta\vee\dimMeta}
+\\[1.5ex]
+
+% variational conditions
+\synDef{\vCond}{\vCondSet}
+  &\eqq& \multicolumn{2}{l}{%
+         \t \myOR \f \myOR \att\bullet\cte \myOR \att\bullet\att
+         \myOR \neg\vCond \myOR \vCond\vee\vCond} \\
+     &|& \multicolumn{2}{l}{\vCond\wedge\vCond \myOR \chc{\vCond,\vCond}}
+\\[1.5ex]
+
+\synDef{\vAttList}{\vAttSet}
+  &\eqq&  \multicolumn{2}{l}{%
+  \vAtt \myOR \chc{\vAtt,\vAtt} \myOR \vAtt,\vAttList \myOR \empRel \myOR \chc{\vAtt,\vAtt},\vAttList}
+  \\[1.5ex]
+  
+% variational relational algebra
+\synDef{\vQ}{\qSet}
+  &\eqq& \vRel                 & \textit{Relation reference} \\
+%     &|& \vRen[\vRel]{\vQ}     & \textit{Renaming} \\
+     &|& \vPrj[\vAttList]{\vQ} & \textit{Projection} \\
+     &|& \vSel\vQ              & \textit{Selection} \\
+     &|& \vQ \times \vQ  & \textit{Cross product} \\
+     &|& \chc{\vQ,\vQ}         & \textit{Choice} \\
+     &|& \empRel               & \textit{Empty relation} \\
+%    &|& \vQ \times \vQ        & \textit{Cartesian Product} \\
+%    &|& \vQ \circ \vQ         & \textit{Set operation} \\
+\end{syntax}
+
+\caption{Syntax of variational relational algebra, where $\bullet$ ranges over
+comparison operators ($<, \leq, =, \neq, >, \geq$), 
+\cte\ over constant values,
+\att\ over attribute names, and \vAttList\ over lists of variational attributes.
+The syntactic category \dimMeta\ represents feature expressions, \vCond\
+is variational conditions, and \vQ\ is variational queries.
+}
+\label{fig:vra}
+\end{figure}
+
+
+ 
+
+\section{Problem Definition}
+\label{sec:def}
+
+The problem I will be attacking is:
+\emph{Assuming that a given a program written in VRA is type correct
+and is of canonical form, is there exist an equivalent program 
+with less variational points?}
+A program is type correct if it passes the type system of VRA~\cite{vldbArXiv},
+i.e., the query conforms to the underlying schema of the database.
+The canonical form of program represent a class of programs that are 
+semantically equivalent based on equivalency rules of relational algebra 
+and the choices are pushed down into the query as much as possible.
+A program in the canonical form follows the following
+order for its operators, if they exist: projection, selection, cross-product; where
+choices could appear at attribute level, condition level, and query level.
+\TODO {I will provide examples of this for the final report to help the reader understand the concept better.}
+This problem is similar to the minimization of binary decision diagrams~\cite{minBDD}
+since it determines if a program can be written with less variational points
+and thus is NP-hard.
+
+
+
+
+\section{Reduction to SAT}
+\label{sec:reduce}
+I generate multiple SAT formulas to check:
+1) if variations used in the query are valid (reasonable),
+e.g., the variation in $\chc [\f] {\vQ_1, \vQ_2}$ is not reasonable 
+although the query is type correct, elaborated in \secref{val},
+2) if dead alternative branches exist in a choice, e.g., 
+the alternative branch $\vQ_2$ will never be executed in the 
+query $\chc [\fName_1] {\chc [\fName_1 \vee \fName_2] {\vQ_1, \vQ_2} \vQ_3}$, 
+elaborated in \secref{dead},
+and 
+3) if a choice has redundancy (this relies on having a structurally equivalence
+relation for the pure relational queries), e.g., the $\vQ_1$ subquery is redundant in the query 
+$\chc [\dimMeta_1] {\vQ_1, \chc [\dimMeta_2] {\vQ_1, \vQ_2}}$, elaborated in \secref{red}.
+Since the VRA is inductive I generate these SAT problems in a bottom-up
+approach while keeping and updating an environment of variables introduced 
+for the formulas.
+
+I generate fresh variables as follows as the first step for generating each SAT formula:
+
+\begin{itemize}
+\item Attribute names are denoted by variables $\att_1, \att_2, \cdots$. Note that the empty attribute is associated with \t.
+\item Conditions are denoted by variables $\cond_1, \cond_2, \cdots$ except for the variational conditions.
+Note that it is easy to define semantically equivalence on pure relational conditions, thus, there is no need
+to break down the conditions except for variational ones. Also, especially since we are not concern with
+semantical equivalence in this project.
+\item Relations are denoted by variables $\vRel_1, \vRel_2, \cdots$. And the empty relation \empRel\ is associated with \t. 
+\item The same feature names are used as their variables in the generated formula. 
+\item The subqueries are denoted by variables $\vQ_1, \vQ_2, \cdots$ and are generated bottom-up.
+\end{itemize}
+
+
+
+\subsection{Generating Validity SAT Formulas}
+\label{sec:val}
+The validity propositional formula for a given query is generated as follows:
+
+\begin{itemize}
+\item For empty relation \empRel\ generate \t.
+\item For each relation \vRel\ generate the clause $\t \wedge \vRel$.
+\item For each attribute \att\ generate the clause $\t \wedge \att$.
+\item For the set of attributes $\att_1, \cdots, \att_n$ generate the formula
+$(\t \wedge \att_1) \wedge \cdots \wedge (\t \wedge \att_n)$.
+\item For each condition \cond\ generate the clause $\t \wedge \cond$.
+\item For a variational attribute $\chc {\att_1, \att_2}$ generate the clause
+$(\dimMeta \wedge (\t \wedge \att_1)) \vee (\neg \dimMeta \wedge (\t \wedge \att_2))$.
+\item For the query $\vPrj \vQ$ generate the formula 
+$\valid {\vAttList} \wedge \valid {\vQ}$ where $\valid \vAttList$ is the validity formula generated for the set 
+of attributes and \valid \vQ\ is the validity formula generated for the subquery \vQ, both based 
+on the description provided above.
+\item For the query $\vSel \vQ$ generate the formula 
+$\valid {\cond} \wedge \valid {\vQ}$ where \valid \cond\ is the validity formula generated for the condition \cond\
+based on the description provided. 
+\item For the query $\chc {\vQ_1, \vQ_2}$ generate the formula
+$(\dimMeta \wedge \valid {\vQ_1}) \vee (\neg \dimMeta \wedge \valid {\vQ_2})$.
+\end{itemize}
+
+If the validity formula generated for a query is not satisfiable then the query contains an invalid (unreasonable) variation and can be rewritten to omit such variation.
+
+\subsection{Generating Dead-Branch SAT Formulas}
+\label{sec:dead}
+The formulas to determine if a query has dead branches  are generated as follows:
+
+\begin{itemize}
+\item For every choice $x = \chc {x_1, x_2}$ in a given query 
+where $x$ is a meta-variable that
+ranges over syntactic categories of conditions, attributes, and queries
+generate two formulas $\deadl x = \dimMeta \to \dimMeta_l$ and 
+$\deadr x = \neg \dimMeta \to \dimMeta_r$ where $\dimMeta_l$
+is the dimension of the choice within the left branch, i.e., $x_1$ and 
+$\dimMeta_r$ is the dimension of the choice within the right branch, i.e., $x_2$.
+And $l \to r$ is implication which can be substituted by $\neg l \vee r$.
+\end{itemize}
+
+Intrinsically, \deadl . and \deadr . determine if the dimension of a nested choice
+is more general that its outside choice which cause some branches to never be executed.
+Note that \deadl . and \deadr . are generated for each syntactic category separately.
+And they solely focus on the interaction of feature expressions. Thus,
+if \sat {\deadl \vQ} or \sat {\deadr \vQ}, then the query \vQ\ contains some dead alternative branches
+and can be simplified.
+
+\subsection{Generating Redundant-Branch SAT Formulas}
+\label{sec:red}
+
+To determine if a query has redundant branches formulas may be generated
+for each nested choice of a specific syntactic category, assuming that we have a structurally equivalence relationship ($\equiv$) over pure relational syntactic 
+category of $x$, as follows:
+
+\begin{itemize}
+\item If the choice has the format $\chc [\dimMeta_1] {x_1, \chc [\dimMeta_2] {x_2, x_3}} $ where $x_1$
+does not have a top level choice we have:
+\begin{itemize}
+\item
+If $x_1 \equiv x_2 $ then they both are assigned the same variable name, say $x^\prime$, then generate the formula\\
+\centerline{$\left(\left(\dimMeta_1 \wedge x^\prime\right) \vee \left(\neg \dimMeta_1 \wedge \dimMeta_2 \wedge x^\prime\right)\right) \leftrightarrow \left(\dimMeta_1 \vee \dimMeta_2 \right) \wedge x^\prime$}.
+\item
+If $x_1 \equiv x_3 $ then they both are assigned the same variable name, say $x^\prime$, then generate the formula\\
+\centerline{$\left(\left(\dimMeta_1 \wedge x^\prime\right) \vee \left(\neg \dimMeta_1 \wedge \neg \dimMeta_2 \wedge x^\prime\right)\right) \leftrightarrow \left(\dimMeta_1 \vee \neg \dimMeta_2 \right) \wedge x^\prime$}.\end{itemize}
+
+\item If the choice has the format $\chc [\dimMeta_1] {\chc [\dimMeta_2] {x_1, x_2}, x_3} $where $x_3$
+does not have a top level choice we have:
+\begin{itemize}
+\item 
+If $x_2 \equiv x_3 $ then they both are assigned the same variable name, say $x^\prime$, then generate the formula\\
+\centerline{$\left(\left(\neg \dimMeta_1 \wedge x^\prime\right) \vee \left( \dimMeta_1 \wedge \neg\dimMeta_2 \wedge x^\prime\right)\right) \leftrightarrow \left(\dimMeta_1 \wedge \dimMeta_2 \right) \wedge x^\prime$}.
+\item
+If $x_1 \equiv x_3 $ then they both are assigned the same variable name, say $x^\prime$, then generate the formula\\
+\centerline{$\left(\left(\neg \dimMeta_1 \wedge x^\prime\right) \vee \left( \dimMeta_1 \wedge \dimMeta_2 \wedge x^\prime\right)\right) \leftrightarrow \left(\dimMeta_1 \wedge \neg \dimMeta_2 \right) \wedge x^\prime$}.
+\end{itemize}
+\item If the choice has the format $\chc [\dimMeta_1] {\chc [\dimMeta_2] {x_1, x_2}, \chc [\dimMeta_3] {x_3, x_4}} $ we have:
+\begin{itemize}
+\item 
+If $\dimMeta_2 \equiv \dimMeta_3$ and $x_2 \equiv x_4$ (thus $x_2$ and $x_4$ are assigned the same variable $x^\prime$) generate the following formula:\\
+\centerline{$\left(\left( \dimMeta_1 \wedge \neg \dimMeta_2 \wedge x^\prime\right) \vee
+\left(\neg \dimMeta_1 \wedge \neg \dimMeta_3 \wedge x^\prime\right)\right) \leftrightarrow \neg \dimMeta_2 \wedge x^\prime$}
+\item 
+If $\dimMeta_2 \equiv \dimMeta_3$ and $x_1 \equiv x_3$ (thus $x_1$ and $x_3$ are assigned the same variable $x^\prime$) generate the following formula:\\
+\centerline{$\left(\left( \dimMeta_1 \wedge  \dimMeta_2 \wedge x^\prime\right) \vee
+\left(\neg \dimMeta_1 \wedge  \dimMeta_3 \wedge x^\prime\right)\right) \leftrightarrow  \dimMeta_2 \wedge x^\prime$}\end{itemize}
+\end{itemize}
+
+\rdnt \vQ denotes all the formulas generated as described above for a given query \vQ.
+If at least one of these queries is a tautology then we can conclude that there exists 
+a redundant branch in the query. 
+
+
+\section{Implementation}
+\label{sec:impl}
+
+I am currently implementing the project in Haskell and I use the SBV library for
+solving the SAT problems. The GitHub repo will be provided with the final submission.
+
+\section{Discussion}
+\label{sec:disc}
+Made the mistake of reading the news and lost track of time! However, the following contains 
+my initial thoughts on the project. I will provide a comprehensive discussion for the final report. 
+
+After thinking about this reduction for a week, I do not think that, generally speaking, an AST 
+can be linearized to the extent that it is converted to a single propositional formula to determine
+variation minimization or even worse structural or semantical equivalence. 
+Thus, after narrowing down the problem definition, I began thinking about different types of minimizations
+such as redundant branches and dead branches. I also believe I was able to do so because of the
+nature of choice calculus and that it uses propositional formulas within itself. At the same time, I 
+am skeptical that the reductions I have provided cover all the cases and I am interested to 
+know if there is a way to prove or deny that this reduction can certainly determine if
+a variational query can be minimized or not.
+I did not simplified the query language that much and I believe adding operations such as 
+union and intersection would not break down the reduction. However, an important difference
+of the language that I provided here with the original VRA is that variation appears in the language
+used in this project in only one manner as opposed to original VRA that provides tagging elements
+with feature expression for a better usability. Such simplification does not reduce the expressiveness of the
+language, however, it made it syntactically more consistent which helped with the reduction. Purposeful language design does wonders!
+
+ADD FOR FINAL SUBMISSION:
+-renaming in lang design!! this would have made abt in stead of ast and we would have to keep track of the bindings.
+
+\bibliographystyle{plain}
+\bibliography{bib/eric,bib/martin,bib/vdbms,bib/change,bib/vds,bib/fp,bib/error-reporting,bib/misc,bib/dblp2_short,bib/prj.bib}
+
+\end{document}
