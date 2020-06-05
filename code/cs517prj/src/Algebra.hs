@@ -176,7 +176,8 @@ data Cond
 
 -- | pretty prints pure relational conditions.
 prettyCond :: Cond -> String
-prettyCond (CChc f l r) = undefined
+prettyCond (CChc f l r) = prettyFeatureExpr f ++ " < " 
+  ++ prettyCond l ++ " , " ++ prettyCond r ++ " > "
 prettyCond c = top c
   where
     top (Comp o l r) = show l ++ show o ++ show r
