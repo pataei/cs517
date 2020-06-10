@@ -3,10 +3,24 @@
 # For more information, please see the documentation at:
 #   https://docs.haskellstack.org/en/stable/lock_files
 
-packages: []
+packages:
+- completed:
+    hackage: HDBC-2.4.0.3@sha256:99d3de808f53271afb0a8c31adfc99c7ef94f28355aba58bb0c9dffd4376296f,2998
+    pantry-tree:
+      size: 1004
+      sha256: 4a151afa92d9d77a85b5d05583b93744bbec353b995a07daf4a4739211ced292
+  original:
+    hackage: HDBC-2.4.0.3
+- completed:
+    hackage: sbv-8.5@sha256:62217ddd7a29e14e75286cba4b406187f37df63fd48f356a6639e3f9c82a18c0,19781
+    pantry-tree:
+      size: 54393
+      sha256: c80e3c0b08211b163b5b540e9356ffc77f3e69a4e7b08e3c6b21cb3bfe22ebbe
+  original:
+    hackage: sbv-8.5
 snapshots:
 - completed:
-    size: 500539
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/13/27.yaml
-    sha256: 690db832392afe55733b4c7023fd29b1b1c660ee42f1fb505b86b07394ca994e
-  original: lts-13.27
+    size: 491373
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/15/3.yaml
+    sha256: 29e9ff61b8bf4b4fcff55cde3ac106ebb971f0d21331dccac9eee63374fa6ca8
+  original: lts-15.3

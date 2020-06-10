@@ -1,28 +1,32 @@
 /Volumes/GoogleDrive/My Drive/OSU/2020/Spring/CS517/prj/code/cs517prj/cs517prj.cabal:
-  hash: 6a3c15539280a8e15d01560ad6adb6f5a7a14cb1901b5fe8bdc7a0184bb4f284
-  size: 2159
-  modtime: 1591333240
+  hash: 2a44c509f05e4dcc4baa84d6a6f6aa05294d16403c3ff7ea13044a7d3330b71f
+  size: 2190
+  modtime: 1591738341
 /Volumes/GoogleDrive/My Drive/OSU/2020/Spring/CS517/prj/code/cs517prj/src/SAT.hs:
   hash: 4039a55109b6304191b3ad386a7d1f97868bdbf5eed08a5b6916f9f4ea73c851
   size: 1326
   modtime: 1591332232
+/Volumes/GoogleDrive/My Drive/OSU/2020/Spring/CS517/prj/code/cs517prj/src/MinVar.hs:
+  hash: e8197eb3e469be08b5aeacc56b76db4782fec0ca37ba30841d2ebef34ccbdb3d
+  size: 2304
+  modtime: 1591738224
 /Volumes/GoogleDrive/My Drive/OSU/2020/Spring/CS517/prj/code/cs517prj/ChangeLog.md:
   hash: cbabde4e3c2477869ec4a8591084bead29efc91c050b8beff6353085b07b2c3b
   size: 48
   modtime: 1590464939
 /Volumes/GoogleDrive/My Drive/OSU/2020/Spring/CS517/prj/code/cs517prj/src/Algebra.hs:
-  hash: cf03875be8d73935d0f323ff24f68fb74e99534cb8663ca8d25ede43d3390ad6
-  size: 6192
-  modtime: 1591333506
+  hash: d00b9a6e6d89ef5525621435de0dd7167d326347163850da4b4b3f4e0e92c919
+  size: 6453
+  modtime: 1591734626
 /Volumes/GoogleDrive/My Drive/OSU/2020/Spring/CS517/prj/code/cs517prj/src/Config.hs:
-  hash: 87ab13b7e541de09dede7330c80fee66165f9a91440221af4fd4c44e3cdceacb
-  size: 2332
-  modtime: 1591333354
+  hash: 24967835e98a84490fe6067a6f778887559d3894be9201e899262a450f8a2418
+  size: 2243
+  modtime: 1591729604
 /Volumes/GoogleDrive/My Drive/OSU/2020/Spring/CS517/prj/code/cs517prj/README.md:
   hash: 79cad06c7c7118ff8d2351af3a4cb4dc8403574842b8c52dd6486fd089d83c48
   size: 11
   modtime: 1590464939
 /Volumes/GoogleDrive/My Drive/OSU/2020/Spring/CS517/prj/code/cs517prj/package.yaml:
-  hash: 8e50d1002a497833300d7a0b4dbb5a4b6b5e05a4a85ec4d3ed2dddab063c6e7f
-  size: 1380
-  modtime: 1591333016
+  hash: e1dcf610c57b5ad44a207f4f0ef98607fc3eab7e92fd2429454834644536dd82
+  size: 1387
+  modtime: 1591738336

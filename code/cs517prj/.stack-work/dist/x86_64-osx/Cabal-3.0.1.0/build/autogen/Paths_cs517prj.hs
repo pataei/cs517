@@ -29,12 +29,12 @@ version :: Version
 version = Version [0,1,0,0] []
 bindir, libdir, dynlibdir, datadir, libexecdir, sysconfdir :: FilePath
 
-bindir     = "/Volumes/GoogleDrive/My Drive/OSU/2020/Spring/CS517/prj/code/cs517prj/.stack-work/install/x86_64-osx/530442852250e5010b2bce5a1c0fa4e869dd9bafd3cff39c19cac20daa019ab1/8.8.3/bin"
-libdir     = "/Volumes/GoogleDrive/My Drive/OSU/2020/Spring/CS517/prj/code/cs517prj/.stack-work/install/x86_64-osx/530442852250e5010b2bce5a1c0fa4e869dd9bafd3cff39c19cac20daa019ab1/8.8.3/lib/x86_64-osx-ghc-8.8.3/cs517prj-0.1.0.0-9EDi78Wh3Of628dIXPPaMz"
-dynlibdir  = "/Volumes/GoogleDrive/My Drive/OSU/2020/Spring/CS517/prj/code/cs517prj/.stack-work/install/x86_64-osx/530442852250e5010b2bce5a1c0fa4e869dd9bafd3cff39c19cac20daa019ab1/8.8.3/lib/x86_64-osx-ghc-8.8.3"
-datadir    = "/Volumes/GoogleDrive/My Drive/OSU/2020/Spring/CS517/prj/code/cs517prj/.stack-work/install/x86_64-osx/530442852250e5010b2bce5a1c0fa4e869dd9bafd3cff39c19cac20daa019ab1/8.8.3/share/x86_64-osx-ghc-8.8.3/cs517prj-0.1.0.0"
-libexecdir = "/Volumes/GoogleDrive/My Drive/OSU/2020/Spring/CS517/prj/code/cs517prj/.stack-work/install/x86_64-osx/530442852250e5010b2bce5a1c0fa4e869dd9bafd3cff39c19cac20daa019ab1/8.8.3/libexec/x86_64-osx-ghc-8.8.3/cs517prj-0.1.0.0"
-sysconfdir = "/Volumes/GoogleDrive/My Drive/OSU/2020/Spring/CS517/prj/code/cs517prj/.stack-work/install/x86_64-osx/530442852250e5010b2bce5a1c0fa4e869dd9bafd3cff39c19cac20daa019ab1/8.8.3/etc"
+bindir     = "/Volumes/GoogleDrive/My Drive/OSU/2020/Spring/CS517/prj/code/cs517prj/.stack-work/install/x86_64-osx/ba417f4d129332198be87d8fc20d852cfd99bc81827ba4d4511a4412922c4f2c/8.8.2/bin"
+libdir     = "/Volumes/GoogleDrive/My Drive/OSU/2020/Spring/CS517/prj/code/cs517prj/.stack-work/install/x86_64-osx/ba417f4d129332198be87d8fc20d852cfd99bc81827ba4d4511a4412922c4f2c/8.8.2/lib/x86_64-osx-ghc-8.8.2/cs517prj-0.1.0.0-HX6lcrz8APL9Vq6VdD7RL"
+dynlibdir  = "/Volumes/GoogleDrive/My Drive/OSU/2020/Spring/CS517/prj/code/cs517prj/.stack-work/install/x86_64-osx/ba417f4d129332198be87d8fc20d852cfd99bc81827ba4d4511a4412922c4f2c/8.8.2/lib/x86_64-osx-ghc-8.8.2"
+datadir    = "/Volumes/GoogleDrive/My Drive/OSU/2020/Spring/CS517/prj/code/cs517prj/.stack-work/install/x86_64-osx/ba417f4d129332198be87d8fc20d852cfd99bc81827ba4d4511a4412922c4f2c/8.8.2/share/x86_64-osx-ghc-8.8.2/cs517prj-0.1.0.0"
+libexecdir = "/Volumes/GoogleDrive/My Drive/OSU/2020/Spring/CS517/prj/code/cs517prj/.stack-work/install/x86_64-osx/ba417f4d129332198be87d8fc20d852cfd99bc81827ba4d4511a4412922c4f2c/8.8.2/libexec/x86_64-osx-ghc-8.8.2/cs517prj-0.1.0.0"
+sysconfdir = "/Volumes/GoogleDrive/My Drive/OSU/2020/Spring/CS517/prj/code/cs517prj/.stack-work/install/x86_64-osx/ba417f4d129332198be87d8fc20d852cfd99bc81827ba4d4511a4412922c4f2c/8.8.2/etc"
 
 getBinDir, getLibDir, getDynLibDir, getDataDir, getLibexecDir, getSysconfDir :: IO FilePath
 getBinDir = catchIO (getEnv "cs517prj_bindir") (\_ -> return bindir)

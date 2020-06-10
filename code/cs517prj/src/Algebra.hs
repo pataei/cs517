@@ -40,7 +40,11 @@ newtype Attribute = Attribute { attributeName :: Name }
   -- deriving (Eq, IsString, Ord, Show)
   deriving (Data,Eq,IsString,Ord,Read,Show,Typeable)
 
-type AttList = [Attribute]
+data VAtt = Attr Attribute
+          | AtChc FeatureExpr VAtt VAtt
+  deriving (Eq, Show, Ord, Data, Typeable)
+
+type AttList = [VAtt]
 
 -- 
 -- Feature expression and instances.
@@ -62,7 +66,7 @@ data FeatureExpr
   | And FeatureExpr FeatureExpr
   | Or FeatureExpr FeatureExpr
  -- deriving (Eq, Show)
- deriving (Data, Typeable)
+ deriving (Data, Typeable, Eq)
 
 -- | Pretty print a feature expression.
 prettyFeatureExpr :: FeatureExpr -> String
@@ -82,21 +86,22 @@ prettyFeatureExpr = top
     sub e         = "(" ++ top e ++ ")"
 
 -- | Evaluate a feature expression against a configuration.
-evalFeatureExpr :: Boolean b => Config b -> FeatureExpr -> b
-evalFeatureExpr _ (FLit b)  = if b then true else false
-evalFeatureExpr c (Ref f)   = c f
-evalFeatureExpr c (Not e)   = bnot (evalFeatureExpr c e)
-evalFeatureExpr c (And l r) = evalFeatureExpr c l &&& evalFeatureExpr c r
-evalFeatureExpr c (Or  l r) = evalFeatureExpr c l ||| evalFeatureExpr c r
+-- evalFeatureExpr :: Boolean b => Config b -> FeatureExpr -> b
+-- evalFeatureExpr _ (FLit b)  = if b then true else false
+-- evalFeatureExpr c (Ref f)   = c f
+-- evalFeatureExpr c (Not e)   = bnot (evalFeatureExpr c e)
+-- evalFeatureExpr c (And l r) = evalFeatureExpr c l &&& evalFeatureExpr c r
+-- evalFeatureExpr c (Or  l r) = evalFeatureExpr c l ||| evalFeatureExpr c r
 
 -- | Generate a symbolic predicate for a feature expression.
-symbolicFeatureExpr :: FeatureExpr -> Predicate
-symbolicFeatureExpr e = do
-    let fs = Set.toList (features e)
-    syms <- fmap (Map.fromList . zip fs) (sBools (map featureName fs))
-    let look f = fromMaybe err (Map.lookup f syms)
-    return (evalFeatureExpr look e)
-  where err = error "symbolicFeatureExpr: Internal error, no symbol found."
+-- symbolicFeatureExpr :: FeatureExpr -> Predicate
+-- symbolicFeatureExpr e = 
+-- symbolicFeatureExpr e = do
+--     let fs = Set.toList (features e)
+--     syms <- fmap (Map.fromList . zip fs) (sBools (map featureName fs))
+--     let look f = fromMaybe err (Map.lookup f syms)
+--     return (evalFeatureExpr look e)
+--   where err = error "symbolicFeatureExpr: Internal error, no symbol found."
 
 -- | Less than equal for feature expressions.
 leFexp :: FeatureExpr -> FeatureExpr -> Bool
@@ -115,21 +120,21 @@ leFexp (Or l r)    (Or l' r')    = leFexp l l' && leFexp r r'
 leFexp _ _ = False
 
 
-instance Boolean FeatureExpr where
-  true  = FLit True
-  false = FLit False
-  bnot  = Not
-  (&&&) = And
-  (|||) = Or
+-- instance Boolean FeatureExpr where
+--   true  = FLit True
+--   false = FLit False
+--   bnot  = Not
+--   (&&&) = And
+--   (|||) = Or
 
-instance SAT FeatureExpr where
-  toPredicate = symbolicFeatureExpr
+-- instance SAT FeatureExpr where
+--   toPredicate = symbolicFeatureExpr
 
 instance Show FeatureExpr where
   show = prettyFeatureExpr
 
-instance Eq FeatureExpr where
-  l == r = equivalent l r
+-- instance Eq FeatureExpr where
+--   l == r = equivalent l r
 
 instance Ord FeatureExpr where
  (<=) = leFexp
@@ -192,12 +197,12 @@ instance Show Cond where
   show = prettyCond
 
 
-instance Boolean Cond where
-  true  = CLit True
-  false = CLit False
-  bnot  = CNot
-  (&&&) = CAnd
-  (|||) = COr
+-- instance Boolean Cond where
+--   true  = CLit True
+--   false = CLit False
+--   bnot  = CNot
+--   (&&&) = CAnd
+--   (|||) = COr
 
 -- 
 -- Atoms.

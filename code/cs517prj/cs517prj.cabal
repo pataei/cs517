@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 07e4534e59ef68fe1ea65402cb24f6c66d8a0ce0137e9e697b5b8bf7e941df08
+-- hash: 5e856c55322f94b49f79223bdecea49b5912dbc4704323f2987a5dbb072f53ef
 
 name:           cs517prj
 version:        0.1.0.0
@@ -29,6 +29,7 @@ library
   exposed-modules:
       Algebra
       Config
+      MinVar
       SAT
   other-modules:
       Paths_cs517prj
