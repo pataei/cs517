@@ -10,6 +10,8 @@ import Data.SBV
 import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as M
 
+import Control.Monad.State.Strict
+
 -- returns the size of a query which is the dept of the query's AST.
 querySize :: Algebra -> Int -> Int
 querySize (Proj as q) n = max (querySize q (n+1)) (maximum $ map (flip attSize 0) as)
@@ -46,38 +48,94 @@ fexp2sat (Or l r) =
      sr <- fexp2sat r
      return $ sl .|| sr
 
-type AttEnv = M.Map Attribute SBool
+type Env a = M.Map a SBool
+
+-- type AttEnv = M.Map Attribute 
 
 -- 
-updateAttEnv :: VAtt -> AttEnv -> Symbolic AttEnv
-updateAttEnv (Attr a) env = 
+-- updateAttEnv :: VAtt -> AttEnv -> Symbolic AttEnv
+-- updateAttEnv (Attr a) env = 
+--   do sa <- sBool (attributeName a)
+--      return $ M.insert a (sTrue .&& sa) env
+-- updateAttEnv (AtChc _ l r) env = 
+--   do envl <- updateAttEnv l env
+--      updateAttEnv r envl
+
+-- 
+att2sat :: VAtt -> Symbolic SBool
+att2sat (Attr a) = 
+  -- return (env M.! a) 
   do sa <- sBool (attributeName a)
-     return $ M.insert a (sTrue .&& sa) env
-updateAttEnv (AtChc _ l r) env = 
-  do envl <- updateAttEnv l env
-     updateAttEnv r envl
-
--- 
-att2sat :: VAtt -> AttEnv -> Symbolic SBool
-att2sat (Attr a) env = return (env M.! a) 
-att2sat (AtChc f l r) env = 
+     return $ sTrue .&& sa
+att2sat (AtChc f l r) = 
   do sf <- fexp2sat f 
-     sl <- att2sat l env
-     sr <- att2sat r env
+     sl <- att2sat l 
+     sr <- att2sat r 
      return $ (sf .&& sl) .|| ((sNot sf) .&& sr)
 
 -- generates the sat formula for attributes.
 atts2sat :: AttList -> Symbolic SBool
 atts2sat as =
-  do envs <- mapM (flip updateAttEnv M.empty) as
-     let env = foldr M.union M.empty envs
-     sas <- mapM (flip att2sat env) as
+  -- do envs <- mapM (flip updateAttEnv M.empty) as
+     -- let env = foldr M.union M.empty envs
+  do sas <- mapM att2sat as
      return $ foldr (.&&) sTrue sas
 
 
+type CondEnv = M.Map Cond (Symbolic SBool)
+
+-- type CondState = State Int CondEnv
+
+type CondState a = State (Int, CondEnv) a
+
+-- 
+genCondEnv :: Cond -> CondState ()
+genCondEnv (CLit _) = return ()
+genCondEnv c@(Comp _ _ _) = 
+  do (cnt, env) <- get 
+     let v = M.lookup c env
+     case v of 
+       Nothing -> modify' (\(i,e) -> (i+1,M.insert c (sBool $ "c" ++ show cnt) e))
+       Just vn -> return ()      
+genCondEnv (CNot c) = genCondEnv c
+genCondEnv (COr l r) = genCondEnv l >> genCondEnv r
+genCondEnv (CAnd l r) = genCondEnv l >> genCondEnv r
+genCondEnv (CChc _ l r) = genCondEnv l >> genCondEnv r
+
 -- generates the sat forumla for conditions.
-conds2sat :: Cond -> SBool
-conds2sat = undefined
+conds2sat :: Cond -> CondEnv -> Symbolic SBool
+conds2sat (CLit True) env = return sTrue
+conds2sat (CLit False) env = return sFalse
+conds2sat c@(Comp _ _ _) env = (env M.! c)
+conds2sat (CNot c) env = conds2sat c env >>= return . sNot
+conds2sat (COr l r) env = 
+  do sl <- conds2sat l env
+     sr <- conds2sat r env
+     return $ sl .|| sr 
+conds2sat (CAnd l r) env =
+  do sl <- conds2sat l env
+     sr <- conds2sat r env
+     return $ sl .&& sr
+conds2sat (CChc f l r) env =
+  do sl <- conds2sat l env
+     sr <- conds2sat r env
+     sf <- fexp2sat f 
+     return $ (sf .&& sl) .|| ((sNot sf) .&& sr)
+
+type AlgEnv = M.Map Algebra (Symbolic SBool)
+
+-- type CondState = State Int CondEnv
+
+type AlgState a = State (Int, AlgEnv) a
+
+-- 
+genAlgEnv :: Algebra -> AlgState ()
+genAlgEnv (Proj _ q) = undefined
+genAlgEnv (Sel _ q) = undefined
+genAlgEnv (AChc _ l r) = undefined
+genAlgEnv (Prod l r) = undefined
+genAlgEnv (TRef r) = undefined
+genAlgEnv Empty = return ()
 
 -- generates the sat formula for query.
 q2sat :: Algebra -> SBool
