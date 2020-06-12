@@ -130,11 +130,11 @@ type AlgState a = State (Int, AlgEnv) a
 
 -- 
 genAlgEnv :: Algebra -> AlgState ()
-genAlgEnv (Proj _ q) = undefined
-genAlgEnv (Sel _ q) = undefined
-genAlgEnv (AChc _ l r) = undefined
-genAlgEnv (Prod l r) = undefined
-genAlgEnv (TRef r) = undefined
+genAlgEnv q@(Proj _ sq) = undefined
+genAlgEnv q@(Sel _ sq) = undefined
+genAlgEnv q@(AChc _ l r) = undefined
+genAlgEnv q@(Prod l r) = undefined
+genAlgEnv (TRef r) = return ()
 genAlgEnv Empty = return ()
 
 -- generates the sat formula for query.

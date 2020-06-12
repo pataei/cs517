@@ -247,27 +247,104 @@ is variational conditions, and \vQ\ is variational queries.
 \label{sec:def}
 
 The problem I will be attacking is:
-\emph{Assuming that a given a program written in VRA is type correct
-and is of canonical form, is there exist an equivalent program 
-with less variational points?}
+\emph{Given a type-correct program written in VRA 
+ is there exist a smaller equivalent program?}
 A program is type correct if it passes the type system of VRA~\cite{vldbArXiv},
 i.e., the query conforms to the underlying schema of the database.
-The canonical form of program represent a class of programs that are 
-semantically equivalent based on equivalency rules of relational algebra 
-and the choices are pushed down into the query as much as possible.
-A program in the canonical form follows the following
-order for its operators, if they exist: projection, selection, cross-product; where
-choices could appear at attribute level, condition level, and query level.
-\TODO {I will provide examples of this for the final report to help the reader understand the concept better.}
-This problem is similar to the minimization of binary decision diagrams~\cite{minBDD}
-since it determines if a program can be written with less variational points
-and thus is NP-hard.
+The size of a program is the depth of its abstract syntax tree. 
+I only consider syntactical equivalence and not semantical. 
+For example, assume we have the relation $\vRel (\att_1, \att_2)$.
+The query $\vRel$ and $\pi_{\att_1, \att_2} \vRel$ are semantically
+equivalent since both are projecting the same set of attributes from the
+given relation, however, the former does this implicitly. 
+This problem (and possible solutions to it) could be use to address
+a harder problem: \emph{finding the global minimal program written in VRA}, 
+which is similar to the minimization of binary decision diagrams~\cite{minBDD}.
+%The canonical form of program represent a class of programs that are 
+%semantically equivalent based on equivalency rules of relational algebra 
+%and the choices are pushed down into the query as much as possible.
+%A program in the canonical form follows the following
+%order for its operators, if they exist: projection, selection, cross-product; where
+%choices could appear at attribute level, condition level, and query level.
+%\TODO {I will provide examples of this for the final report to help the reader understand the concept better.}
+%This problem is similar to the minimization of binary decision diagrams~\cite{minBDD}
+%and is rather useful 
+%since it determines if a program can be written with less variational points
+%and thus is NP-hard.
 
 
 
 
 \section{Reduction to SAT}
 \label{sec:reduce}
+
+The overall algorithm works as follows:
+
+\begin{tabbing}
+\qquad \= on input $\vQ$ (assuming \vQ\ is type-correct):\\
+\> generate the corresponding SAT formulas for \vQ: $\Pi_\vQ, \Sigma_\vQ, \Psi_\vQ$\\
+\> for every subquery $\vQ_i$ of \vQ\\
+\> \qquad \= restructure $\vQ^\prime$ to generate a new type-correct subquery $\vQ_i^{\prime}$ and\\ 
+\> \qquad \qquad replace $\vQ_i^{\prime}$ with $\vQ_i$  in \vQ\ resulting in the new query $\vQ^\prime$\\
+\> \qquad generate the corresponding SAT formulas for $\vQ^\prime$: $\Pi_{\vQ^\prime}, \Sigma_{\vQ^\prime}, \Psi_{\vQ^\prime}$\\
+\> \qquad check if $|\vQ^\prime| < |\vQ| $ and $\taut {\Pi_\vQ \leftrightarrow \Pi_{\vQ^\prime}}$
+and $\taut {\Sigma_\vQ \leftrightarrow \Sigma_{\vQ^\prime}}$ and $\taut {\Psi_\vQ \leftrightarrow \Psi_{\vQ^\prime}}$ \\
+\> \qquad \qquad then say yes\\
+\> \qquad otherwise choose another subquery $\vQ_j$ of \vQ\ and do the above\\
+\> if for all possible restructuring of subqueries of \vQ\ no smaller equivalent program\\
+\> \qquad could be found say no
+\end{tabbing}
+
+A subquery (subprogram) is a subtree of the AST of the given query (program).
+Thus, restructuring a subquery is practically restructuring a program. However,
+not every restructuring is acceptable since it may generate type-ill queries. Thus,
+I use a set of rules to ensure that the new query is not ill-typed~\footnote{I'm not
+sure if doing so violates the guessing part since it is following a set of rules. However,
+I couldn't think of a completely random approach of generating new queries.}
+
+Three SAT formula is generated for a given query \vQ:
+
+\begin{itemize}
+\item 
+ The formula $\Pi_\vQ$ takes the attributes of a query that uses the  projection operator and
+ assigns a boolean variable to each attribute with the same name as the attribute (this is
+ under the assumption that attribute names are unique). It encodes a choice of attributes $\chc {\att_1, \att_2}$
+to $(\dimMeta \wedge \att_1) \vee (\neg \dimMeta \wedge \att_2)$ and encodes a list of attributes $\att_1, \att_2$ to $\att_1 \att_2$.
+For example, for the query $\vQ_1 = \pi_{\att_1, \chc {\att_2, \att_3}} \vRel$ we have the formula:
+$\Pi = \att_1 \wedge ((\dimMeta \wedge \att_2) \vee (\neg \dimMeta \wedge \att_3))$.
+\item
+The formula $\Sigma_\vQ$ takes the conditions of a query that uses the selection operator
+and assigns a variable name to a new atomic condition and keeps these assignments in an environment.
+An atomic condition has the form $\att\bullet\cte$ or  $\att\bullet\att $. Choices of conditions are encoded 
+similar to choices of attributes and the conjunction and disjunction between conditions are kept as is.
+For example, for the query
+$\vQ_2 = \sigma_{\chc {\att_1 > 100, \att_2 = \att_3 \vee \att_4 < 100}} \vRel$
+we have the formula:
+$\Sigma = (\dimMeta \wedge c_1) \vee (\neg \dimMeta \wedge (c_2 \vee c_3))$,
+where $c_1$ associates to condition $\att_1 >100$
+and $c_2$ and $c_3$ associate to conditions $\att_2 = \att_3$ and $\att_4 <100$,
+respectively.
+\item 
+The formula $\Psi _\vQ$ encodes the relation of subqueries within a query by assigning 
+a variable to relations with the same name as the relation and generating new variables 
+for each subquery. For example, for $\vQ_1$ we have $\Psi_{\vQ_1 } = \vRel$.
+For the query $\vQ_3 = \vRel_1 \times \vRel_2$ we have
+$\Psi_{\vQ_3} = \vRel_1 \wedge \vRel_2$. For a choice of relations 
+$\vQ_4 = \chc {\vRel_1, \vRel_2}$ we have $\Psi_{\vQ_4}= (\dimMeta \wedge \vRel_1) \vee (\neg \dimMeta \wedge \vRel_2)$. For the query $\empRel$ we have $\Psi = \t$. 
+For the query $\pi_{\att_1} (\sigma_{\att_2=\att_3} \vRel)$, we have:
+$\Psi = \vRel \wedge p_1 $ where $p_1$ associates to the subquery $\sigma_{\att_2=\att_3} \vRel$.
+\emph{Concern:} assigning a variable to a new subquery and saving it in an environment is problematic since
+when it comes to searching the environment to see if a subquery is already assigned a variable 
+we need to have a notion of equivalent for queries which is partly the point of constructing these formulas.
+At the moment, such notion of equivalency is only based on the structure of a query. This was not a problem
+for the other two generated formulas ($\Pi$ and $\Sigma$) because we have a notion of semantic equivalence for attributes and conditions (and their environment can be searched correctly) and we are generating their corresponding formulas to help check the equivalency of the queries and not themselves (attributes and conditions). I appreciate any suggestion you may have for this problem.
+\end{itemize}
+
+Finally, for checking the equivalency of two programs $\vQ_1$ and $\vQ_2$ we can check~\footnote{Idea of checking equivalency like this is taken from \href{https://resources.mpi-inf.mpg.de/departments/rg1/conferences/vtsa12/slides/biere/Biere-VTSA12-talk.pdf}{here}.}:
+$\taut {\Pi_\vQ \leftrightarrow \Pi_{\vQ^\prime}}$
+and $\taut {\Sigma_\vQ \leftrightarrow \Sigma_{\vQ^\prime}}$ and $\taut {\Psi_\vQ \leftrightarrow \Psi_{\vQ^\prime}}$. The tautology can be checked by negating the unsatisfiability of a formula.
+
+\begin{comment}
 I generate multiple SAT formulas to check:
 1) if variations used in the query are valid (reasonable),
 e.g., the variation in $\chc [\f] {\vQ_1, \vQ_2}$ is not reasonable 
@@ -390,16 +467,59 @@ If $\dimMeta_2 \equiv \dimMeta_3$ and $x_1 \equiv x_3$ (thus $x_1$ and $x_3$ are
 \rdnt \vQ denotes all the formulas generated as described above for a given query \vQ.
 If at least one of these queries is a tautology then we can conclude that there exists 
 a redundant branch in the query. 
-
+\end{comment}
 
 \section{Implementation}
 \label{sec:impl}
 
-I am currently implementing the project in Haskell and I use the SBV library for
-solving the SAT problems. The GitHub repo will be provided with the final submission.
+The project is implemented in Haskell and uses the \href{https://hackage.haskell.org/package/sbv-8.5}{SBV library} for
+solving the SAT problems. The project can be find in this \href{https://github.com/pataei/cs517/tree/master/code/cs517prj}{GitHub repo}. 
+This project turned out to be more of an exploratory project and the implementation does not completely address the problem until the research questions mentioned in \secref{reduce} are addressed. 
+%Please follow the instructions in README to test the examples.
 
-\section{Discussion}
+
+\section{Future Work}
 \label{sec:disc}
+
+\emph{Disclaimer~\footnote{I hate that I am writing this disclaimer but it is Thursday and I just want to give you a sense of my stress this week}:} 
+After your feedback, it took me a day (and some discussion with a colleague)  
+to realize that I should change
+my entire way of thinking and move away from trying to find equivalence rules
+(how I am trained to think about these kinds of problems as a PL researcher)
+and converting them to SAT problems. Your comment of thinking about it
+in terms of guessing and checking really helped, however, I was really
+stressed out that I have to change my entire project based on your feedback
+and I realized guessing an equivalent program and checking it with SAT
+solver might not have been as straight forward as I thought. I was planning
+on doing some experiments for the discussion part of the project 
+on Wednesday and Thursday but unfortunately I
+got food poisoning and could only manage to write this report. 
+Still, this is a research project that I am interested in (also my research 
+group found this problem rather interesting and beneficial) and I'm planning
+on continuing to work on it when I find the time, thus, instead of discussion
+I provide how I want to proceed this problem in future. I hope
+you consider the current and my personal situation while reviewing and grading 
+the project and thanks for allowing us to define our own projects (although I'm not
+happy with how I'm turning in this project it's a great side project for future):
+%Although as I explained
+%in \secref{red} I am still not sure if restructuring subtrees of the AST
+%based on some rules is 
+%considered guessing.
+
+\begin{itemize}
+\item Improve the subtree restructuring of the guessed equivalent program 
+based on some rules.
+\item Address the concern mentioned in \secref{reduce}.
+\item Generate random type-correct queries (programs) written in VRA for a given database 
+schema. This would also be a side project that would help my own research!
+\item Analyze the approach in terms of the size of the input program, how long
+it takes to find a possible smaller equivalent program, instances that it fails, etc.
+Explore if this is a reasonable and performant 
+approach to address finding the global minimum of a program
+written in VRA.
+\end{itemize}
+
+\begin{comment}
 Made the mistake of reading the news and lost track of time! However, the following contains 
 my initial thoughts on the project. I will provide a comprehensive discussion for the final report. 
 
@@ -421,6 +541,7 @@ language, however, it made it syntactically more consistent which helped with th
 
 ADD FOR FINAL SUBMISSION:
 -renaming in lang design!! this would have made abt in stead of ast and we would have to keep track of the bindings.
+\end{comment}
 
 \bibliographystyle{plain}
 \bibliography{bib/eric,bib/martin,bib/vdbms,bib/change,bib/vds,bib/fp,bib/error-reporting,bib/misc,bib/dblp2_short,bib/prj.bib}
