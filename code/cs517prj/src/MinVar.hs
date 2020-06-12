@@ -156,11 +156,3 @@ minimalQuery :: Algebra -> Algebra -> Bool
 minimalQuery = undefined
 
 
--- isValid :: Algebra -> Bool
--- isValid = undefined
-
--- hasDeadBranch :: Algebra -> Bool
--- hasDeadBranch = undefined
-
--- hasRedundantBranch :: Algebra -> Bool
--- hasRedundantBranch = undefined
